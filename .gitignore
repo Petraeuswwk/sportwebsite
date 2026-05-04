@@ -1,0 +1,24 @@
+# WordPress 开发环境（不需要上传）
+wordpress-dev/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 日志
+*.log
+wp-content/debug.log
+
+# Node (如果以后用到)
+node_modules/
+
+# 压缩包
+*.zip
+*.tar.gz

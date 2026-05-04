@@ -1,0 +1,534 @@
+# Chinese (Simplified) translation for Sports Wholesale theme
+msgid ""
+msgstr ""
+"Project-Id-Version: Sports Wholesale 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "post type general name"
+msgid "Products"
+msgstr "产品"
+
+msgctxt "post type singular name"
+msgid "Product"
+msgstr "产品"
+
+msgctxt "admin menu"
+msgid "Products"
+msgstr "产品"
+
+msgid "Add New"
+msgstr "新建"
+
+msgid "Add New Product"
+msgstr "添加新产品"
+
+msgid "Edit Product"
+msgstr "编辑产品"
+
+msgid "New Product"
+msgstr "新产品"
+
+msgid "View Product"
+msgstr "查看产品"
+
+msgid "Search Products"
+msgstr "搜索产品"
+
+msgid "No products found"
+msgstr "未找到产品"
+
+msgid "No products found in Trash"
+msgstr "回收站中没有产品"
+
+msgid "All Products"
+msgstr "全部产品"
+
+msgctxt "taxonomy general name"
+msgid "Product Categories"
+msgstr "产品分类"
+
+msgctxt "taxonomy singular name"
+msgid "Product Category"
+msgstr "产品分类"
+
+msgid "Search Categories"
+msgstr "搜索分类"
+
+msgid "All Categories"
+msgstr "所有分类"
+
+msgid "Parent Category"
+msgstr "父级分类"
+
+msgid "Parent Category:"
+msgstr "父级分类："
+
+msgid "Edit Category"
+msgstr "编辑分类"
+
+msgid "Update Category"
+msgstr "更新分类"
+
+msgid "Add New Category"
+msgstr "添加新分类"
+
+msgid "New Category Name"
+msgstr "新分类名称"
+
+msgid "Categories"
+msgstr "分类"
+
+msgctxt "post type general name"
+msgid "Inquiries"
+msgstr "询盘"
+
+msgctxt "post type singular name"
+msgid "Inquiry"
+msgstr "询盘"
+
+msgctxt "admin menu"
+msgid "Inquiries"
+msgstr "询盘"
+
+msgid "Add New Inquiry"
+msgstr "添加新询盘"
+
+msgid "Edit Inquiry"
+msgstr "编辑询盘"
+
+msgid "All Inquiries"
+msgstr "所有询盘"
+
+msgid "View Inquiry"
+msgstr "查看询盘"
+
+msgid "Search Inquiries"
+msgstr "搜索询盘"
+
+msgid "No inquiries found"
+msgstr "未找到询盘"
+
+msgid "No inquiries found in Trash"
+msgstr "回收站中没有询盘"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "MOQ"
+msgstr "起订量"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Email"
+msgstr "邮箱"
+
+msgid "Country"
+msgstr "国家"
+
+msgid "Phone/WhatsApp"
+msgstr "电话/WhatsApp"
+
+msgid "Product Details"
+msgstr "产品详情"
+
+msgid "Subtitle / Short Selling Point"
+msgstr "副标题 / 卖点"
+
+msgid "Reference Price"
+msgstr "参考价格"
+
+msgid "Minimum Order Quantity (MOQ)"
+msgstr "最小起订量（MOQ）"
+
+msgid "Material"
+msgstr "材质"
+
+msgid "Featured Product"
+msgstr "精选产品"
+
+msgid "Mark as featured"
+msgstr "标记为精选"
+
+msgid "Product Gallery"
+msgstr "产品图库"
+
+msgid "Add Images"
+msgstr "添加图片"
+
+msgid "Select multiple images for the product gallery."
+msgstr "选择多张图片作为产品图库。"
+
+msgid "Select Product Images"
+msgstr "选择产品图片"
+
+msgid "Add to Gallery"
+msgstr "添加到图库"
+
+msgid "Select Country"
+msgstr "选择国家"
+
+msgid "Saudi Arabia"
+msgstr "沙特阿拉伯"
+
+msgid "United Arab Emirates"
+msgstr "阿联酋"
+
+msgid "Egypt"
+msgstr "埃及"
+
+msgid "Nigeria"
+msgstr "尼日利亚"
+
+msgid "South Africa"
+msgstr "南非"
+
+msgid "Kenya"
+msgstr "肯尼亚"
+
+msgid "Ghana"
+msgstr "加纳"
+
+msgid "Brazil"
+msgstr "巴西"
+
+msgid "Mexico"
+msgstr "墨西哥"
+
+msgid "Colombia"
+msgstr "哥伦比亚"
+
+msgid "Argentina"
+msgstr "阿根廷"
+
+msgid "Chile"
+msgstr "智利"
+
+msgid "Peru"
+msgstr "秘鲁"
+
+msgid "Spain"
+msgstr "西班牙"
+
+msgid "Portugal"
+msgstr "葡萄牙"
+
+msgid "Italy"
+msgstr "意大利"
+
+msgid "Germany"
+msgstr "德国"
+
+msgid "France"
+msgstr "法国"
+
+msgid "United Kingdom"
+msgstr "英国"
+
+msgid "Turkey"
+msgstr "土耳其"
+
+msgid "Iraq"
+msgstr "伊拉克"
+
+msgid "Jordan"
+msgstr "约旦"
+
+msgid "Lebanon"
+msgstr "黎巴嫩"
+
+msgid "Kuwait"
+msgstr "科威特"
+
+msgid "Qatar"
+msgstr "卡塔尔"
+
+msgid "Oman"
+msgstr "阿曼"
+
+msgid "Bahrain"
+msgstr "巴林"
+
+msgid "India"
+msgstr "印度"
+
+msgid "Pakistan"
+msgstr "巴基斯坦"
+
+msgid "Bangladesh"
+msgstr "孟加拉国"
+
+msgid "Philippines"
+msgstr "菲律宾"
+
+msgid "Indonesia"
+msgstr "印度尼西亚"
+
+msgid "Malaysia"
+msgstr "马来西亚"
+
+msgid "Thailand"
+msgstr "泰国"
+
+msgid "Vietnam"
+msgstr "越南"
+
+msgid "China"
+msgstr "中国"
+
+msgid "United States"
+msgstr "美国"
+
+msgid "General Inquiry"
+msgstr "一般询价"
+
+#, php-format
+msgid "[Sports Wholesale] New Inquiry from %s"
+msgstr "[体育批发] 收到来自 %s 的新询盘"
+
+#, php-format
+msgid "Name: %s"
+msgstr "姓名：%s"
+
+#, php-format
+msgid "Email: %s"
+msgstr "邮箱：%s"
+
+#, php-format
+msgid "Phone/WhatsApp: %s"
+msgstr "电话/WhatsApp：%s"
+
+#, php-format
+msgid "Country: %s"
+msgstr "国家：%s"
+
+#, php-format
+msgid "Interested Product: %s"
+msgstr "意向产品：%s"
+
+#, php-format
+msgid "Message: %s"
+msgstr "留言：%s"
+
+msgid "Primary Navigation"
+msgstr "主导航"
+
+msgid "Table Tennis"
+msgstr "乒乓球"
+
+msgid "Badminton"
+msgstr "羽毛球"
+
+msgid "Tennis"
+msgstr "网球"
+
+msgid "Pickleball"
+msgstr "匹克球"
+
+msgid "Jump Rope"
+msgstr "跳绳"
+
+msgid "Inquiry Settings"
+msgstr "询盘设置"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Inquiry emails are sent to the admin email address:"
+msgstr "询盘邮件发送至管理员邮箱："
+
+msgid "Toggle navigation"
+msgstr "切换导航"
+
+msgid "Home"
+msgstr "首页"
+
+msgid "Products"
+msgstr "产品"
+
+msgid "Contact"
+msgstr "联系我们"
+
+msgid "Your trusted partner for high-quality sports equipment at competitive wholesale prices. Serving clients across the Middle East, Africa, South America, and Europe."
+msgstr "您值得信赖的体育用品批发合作伙伴，提供高性价比产品。服务覆盖中东、非洲、南美及欧洲市场。"
+
+msgid "Quick Links"
+msgstr "快速链接"
+
+msgid "Contact Us"
+msgstr "联系我们"
+
+msgid "Follow Us"
+msgstr "关注我们"
+
+msgid "OEM & ODM orders welcome. Custom branding available."
+msgstr "欢迎 OEM/ODM 订单，支持定制品牌。"
+
+msgid "All rights reserved."
+msgstr "版权所有。"
+
+msgid "B2B Wholesale Sports Equipment Supplier"
+msgstr "B2B 体育用品批发供应商"
+
+msgid "Your inquiry has been sent successfully! We will contact you soon."
+msgstr "您的询盘已成功发送！我们将尽快与您联系。"
+
+msgid "Please fill in all required fields."
+msgstr "请填写所有必填字段。"
+
+msgid "High-Quality Sports Equipment at Wholesale Prices"
+msgstr "高性价比体育用品批发"
+
+msgid "Your trusted B2B supplier for table tennis, badminton, tennis, pickleball, and jump ropes. Competitive pricing with OEM/ODM services available."
+msgstr "您值得信赖的 B2B 供应商，提供乒乓球、羽毛球、网球、匹克球、跳绳等产品。价格优惠，支持 OEM/ODM。"
+
+msgid "Browse Products"
+msgstr "浏览产品"
+
+msgid "Quality Guaranteed"
+msgstr "品质保证"
+
+msgid "Fast Shipping"
+msgstr "快速发货"
+
+msgid "OEM / ODM Service"
+msgstr "OEM/ODM 服务"
+
+msgid "Factory Direct Price"
+msgstr "工厂直销价"
+
+msgid "Product Categories"
+msgstr "产品分类"
+
+msgid "Browse our wide range of sports equipment by category"
+msgstr "按类别浏览我们的体育用品"
+
+msgid "products"
+msgstr "个产品"
+
+msgid "Featured Products"
+msgstr "精选产品"
+
+msgid "Our most popular wholesale items"
+msgstr "我们最受欢迎的批发产品"
+
+msgid "View All Products"
+msgstr "查看全部产品"
+
+msgid "No featured products yet."
+msgstr "暂无精选产品。"
+
+msgid "Ready to Place a Wholesale Order?"
+msgstr "准备好下批发订单了吗？"
+
+msgid "Contact us today for competitive pricing and custom branding options."
+msgstr "立即联系我们，获取优惠价格和定制品牌服务。"
+
+msgid "Request a Quote"
+msgstr "获取报价"
+
+msgid "Sort: Newest"
+msgstr "排序：最新"
+
+msgid "Sort: Price Low to High"
+msgstr "排序：价格从低到高"
+
+msgid "Sort: Price High to Low"
+msgstr "排序：价格从高到低"
+
+msgid "Sort: Name A-Z"
+msgstr "排序：名称 A-Z"
+
+msgid "Filter by Material"
+msgstr "按材质筛选"
+
+msgid "products found"
+msgstr "个产品"
+
+msgid "No products found matching your criteria."
+msgstr "没有找到符合条件的产品。"
+
+msgid "Clear Filters"
+msgstr "清除筛选"
+
+msgid "Browse our complete catalog of wholesale sports equipment"
+msgstr "浏览我们完整的体育用品批发目录"
+
+msgid "Breadcrumb"
+msgstr "面包屑"
+
+msgid "Minimum Order Quantity"
+msgstr "最小起订量"
+
+msgid "Featured"
+msgstr "精选"
+
+msgid "Get a Quote"
+msgstr "获取报价"
+
+msgid "Print"
+msgstr "打印"
+
+msgid "Share"
+msgstr "分享"
+
+msgid "Product Description"
+msgstr "产品描述"
+
+msgid "Related Products"
+msgstr "相关产品"
+
+msgid "Contact Us for a Wholesale Quote"
+msgstr "联系我们获取批发报价"
+
+msgid "Fill out the form below and our sales team will get back to you within 24 hours."
+msgstr "填写以下表单，我们的销售团队将在 24 小时内回复您。"
+
+msgid "Full Name"
+msgstr "姓名"
+
+msgid "Email Address"
+msgstr "电子邮箱"
+
+msgid "Phone / WhatsApp"
+msgstr "电话 / WhatsApp"
+
+msgid "Interested Product"
+msgstr "意向产品"
+
+msgid "Message"
+msgstr "留言"
+
+msgid "Tell us about your requirements, quantity, customization needs, etc."
+msgstr "请告诉我们您的需求、数量、定制要求等。"
+
+msgid "Send Inquiry"
+msgstr "发送询盘"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "MOQ:"
+msgstr "起订量："
+
+msgid "Inquire Now"
+msgstr "立即询价"
+
+msgid "暂无内容"
+msgstr "暂无内容"
+
+msgid "暂时没有可显示的文章。"
+msgstr "暂时没有可显示的文章。"
+

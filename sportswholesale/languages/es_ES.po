@@ -1,0 +1,534 @@
+# Spanish translation for Sports Wholesale theme
+msgid ""
+msgstr ""
+"Project-Id-Version: Sports Wholesale 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "post type general name"
+msgid "Products"
+msgstr "Productos"
+
+msgctxt "post type singular name"
+msgid "Product"
+msgstr "Producto"
+
+msgctxt "admin menu"
+msgid "Products"
+msgstr "Productos"
+
+msgid "Add New"
+msgstr "Agregar Nuevo"
+
+msgid "Add New Product"
+msgstr "Agregar Nuevo Producto"
+
+msgid "Edit Product"
+msgstr "Editar Producto"
+
+msgid "New Product"
+msgstr "Nuevo Producto"
+
+msgid "View Product"
+msgstr "Ver Producto"
+
+msgid "Search Products"
+msgstr "Buscar Productos"
+
+msgid "No products found"
+msgstr "No se encontraron productos"
+
+msgid "No products found in Trash"
+msgstr "No se encontraron productos en la papelera"
+
+msgid "All Products"
+msgstr "Todos los Productos"
+
+msgctxt "taxonomy general name"
+msgid "Product Categories"
+msgstr "Categorías de Productos"
+
+msgctxt "taxonomy singular name"
+msgid "Product Category"
+msgstr "Categoría de Producto"
+
+msgid "Search Categories"
+msgstr "Buscar Categorías"
+
+msgid "All Categories"
+msgstr "Todas las Categorías"
+
+msgid "Parent Category"
+msgstr "Categoría Padre"
+
+msgid "Parent Category:"
+msgstr "Categoría Padre:"
+
+msgid "Edit Category"
+msgstr "Editar Categoría"
+
+msgid "Update Category"
+msgstr "Actualizar Categoría"
+
+msgid "Add New Category"
+msgstr "Agregar Nueva Categoría"
+
+msgid "New Category Name"
+msgstr "Nombre de Nueva Categoría"
+
+msgid "Categories"
+msgstr "Categorías"
+
+msgctxt "post type general name"
+msgid "Inquiries"
+msgstr "Consultas"
+
+msgctxt "post type singular name"
+msgid "Inquiry"
+msgstr "Consulta"
+
+msgctxt "admin menu"
+msgid "Inquiries"
+msgstr "Consultas"
+
+msgid "Add New Inquiry"
+msgstr "Agregar Nueva Consulta"
+
+msgid "Edit Inquiry"
+msgstr "Editar Consulta"
+
+msgid "All Inquiries"
+msgstr "Todas las Consultas"
+
+msgid "View Inquiry"
+msgstr "Ver Consulta"
+
+msgid "Search Inquiries"
+msgstr "Buscar Consultas"
+
+msgid "No inquiries found"
+msgstr "No se encontraron consultas"
+
+msgid "No inquiries found in Trash"
+msgstr "No se encontraron consultas en la papelera"
+
+msgid "Price"
+msgstr "Precio"
+
+msgid "MOQ"
+msgstr "Pedido Mínimo"
+
+msgid "Category"
+msgstr "Categoría"
+
+msgid "Email"
+msgstr "Correo"
+
+msgid "Country"
+msgstr "País"
+
+msgid "Phone/WhatsApp"
+msgstr "Teléfono/WhatsApp"
+
+msgid "Product Details"
+msgstr "Detalles del Producto"
+
+msgid "Subtitle / Short Selling Point"
+msgstr "Subtítulo / Punto de Venta"
+
+msgid "Reference Price"
+msgstr "Precio de Referencia"
+
+msgid "Minimum Order Quantity (MOQ)"
+msgstr "Cantidad Mínima de Pedido (MOQ)"
+
+msgid "Material"
+msgstr "Material"
+
+msgid "Featured Product"
+msgstr "Producto Destacado"
+
+msgid "Mark as featured"
+msgstr "Marcar como destacado"
+
+msgid "Product Gallery"
+msgstr "Galería del Producto"
+
+msgid "Add Images"
+msgstr "Agregar Imágenes"
+
+msgid "Select multiple images for the product gallery."
+msgstr "Seleccione múltiples imágenes para la galería del producto."
+
+msgid "Select Product Images"
+msgstr "Seleccionar Imágenes del Producto"
+
+msgid "Add to Gallery"
+msgstr "Agregar a la Galería"
+
+msgid "Select Country"
+msgstr "Seleccionar País"
+
+msgid "Saudi Arabia"
+msgstr "Arabia Saudita"
+
+msgid "United Arab Emirates"
+msgstr "Emiratos Árabes Unidos"
+
+msgid "Egypt"
+msgstr "Egipto"
+
+msgid "Nigeria"
+msgstr "Nigeria"
+
+msgid "South Africa"
+msgstr "Sudáfrica"
+
+msgid "Kenya"
+msgstr "Kenia"
+
+msgid "Ghana"
+msgstr "Ghana"
+
+msgid "Brazil"
+msgstr "Brasil"
+
+msgid "Mexico"
+msgstr "México"
+
+msgid "Colombia"
+msgstr "Colombia"
+
+msgid "Argentina"
+msgstr "Argentina"
+
+msgid "Chile"
+msgstr "Chile"
+
+msgid "Peru"
+msgstr "Perú"
+
+msgid "Spain"
+msgstr "España"
+
+msgid "Portugal"
+msgstr "Portugal"
+
+msgid "Italy"
+msgstr "Italia"
+
+msgid "Germany"
+msgstr "Alemania"
+
+msgid "France"
+msgstr "Francia"
+
+msgid "United Kingdom"
+msgstr "Reino Unido"
+
+msgid "Turkey"
+msgstr "Turquía"
+
+msgid "Iraq"
+msgstr "Irak"
+
+msgid "Jordan"
+msgstr "Jordania"
+
+msgid "Lebanon"
+msgstr "Líbano"
+
+msgid "Kuwait"
+msgstr "Kuwait"
+
+msgid "Qatar"
+msgstr "Qatar"
+
+msgid "Oman"
+msgstr "Omán"
+
+msgid "Bahrain"
+msgstr "Baréin"
+
+msgid "India"
+msgstr "India"
+
+msgid "Pakistan"
+msgstr "Pakistán"
+
+msgid "Bangladesh"
+msgstr "Bangladés"
+
+msgid "Philippines"
+msgstr "Filipinas"
+
+msgid "Indonesia"
+msgstr "Indonesia"
+
+msgid "Malaysia"
+msgstr "Malasia"
+
+msgid "Thailand"
+msgstr "Tailandia"
+
+msgid "Vietnam"
+msgstr "Vietnam"
+
+msgid "China"
+msgstr "China"
+
+msgid "United States"
+msgstr "Estados Unidos"
+
+msgid "General Inquiry"
+msgstr "Consulta General"
+
+#, php-format
+msgid "[Sports Wholesale] New Inquiry from %s"
+msgstr "[Mayorista Deportivo] Nueva consulta de %s"
+
+#, php-format
+msgid "Name: %s"
+msgstr "Nombre: %s"
+
+#, php-format
+msgid "Email: %s"
+msgstr "Correo: %s"
+
+#, php-format
+msgid "Phone/WhatsApp: %s"
+msgstr "Teléfono/WhatsApp: %s"
+
+#, php-format
+msgid "Country: %s"
+msgstr "País: %s"
+
+#, php-format
+msgid "Interested Product: %s"
+msgstr "Producto de interés: %s"
+
+#, php-format
+msgid "Message: %s"
+msgstr "Mensaje: %s"
+
+msgid "Primary Navigation"
+msgstr "Navegación Principal"
+
+msgid "Table Tennis"
+msgstr "Tenis de Mesa"
+
+msgid "Badminton"
+msgstr "Bádminton"
+
+msgid "Tennis"
+msgstr "Tenis"
+
+msgid "Pickleball"
+msgstr "Pickleball"
+
+msgid "Jump Rope"
+msgstr "Cuerda de Saltar"
+
+msgid "Inquiry Settings"
+msgstr "Configuración de Consultas"
+
+msgid "Settings"
+msgstr "Configuración"
+
+msgid "Inquiry emails are sent to the admin email address:"
+msgstr "Los correos de consultas se envían al correo del administrador:"
+
+msgid "Toggle navigation"
+msgstr "Alternar navegación"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Products"
+msgstr "Productos"
+
+msgid "Contact"
+msgstr "Contacto"
+
+msgid "Your trusted partner for high-quality sports equipment at competitive wholesale prices. Serving clients across the Middle East, Africa, South America, and Europe."
+msgstr "Tu socio de confianza para equipamiento deportivo de alta calidad a precios mayoristas. Atendemos clientes en Medio Oriente, África, Sudamérica y Europa."
+
+msgid "Quick Links"
+msgstr "Enlaces Rápidos"
+
+msgid "Contact Us"
+msgstr "Contáctenos"
+
+msgid "Follow Us"
+msgstr "Síguenos"
+
+msgid "OEM & ODM orders welcome. Custom branding available."
+msgstr "Pedidos OEM y ODM bienvenidos. Marca personalizada disponible."
+
+msgid "All rights reserved."
+msgstr "Todos los derechos reservados."
+
+msgid "B2B Wholesale Sports Equipment Supplier"
+msgstr "Proveedor Mayorista de Equipamiento Deportivo B2B"
+
+msgid "Your inquiry has been sent successfully! We will contact you soon."
+msgstr "¡Su consulta ha sido enviada con éxito! Nos pondremos en contacto pronto."
+
+msgid "Please fill in all required fields."
+msgstr "Por favor complete todos los campos obligatorios."
+
+msgid "High-Quality Sports Equipment at Wholesale Prices"
+msgstr "Equipamiento Deportivo de Alta Calidad a Precios Mayoristas"
+
+msgid "Your trusted B2B supplier for table tennis, badminton, tennis, pickleball, and jump ropes. Competitive pricing with OEM/ODM services available."
+msgstr "Tu proveedor B2B de confianza en tenis de mesa, bádminton, tenis, pickleball y cuerdas de saltar. Precios competitivos con servicios OEM/ODM."
+
+msgid "Browse Products"
+msgstr "Ver Productos"
+
+msgid "Quality Guaranteed"
+msgstr "Calidad Garantizada"
+
+msgid "Fast Shipping"
+msgstr "Envío Rápido"
+
+msgid "OEM / ODM Service"
+msgstr "Servicio OEM / ODM"
+
+msgid "Factory Direct Price"
+msgstr "Precio Directo de Fábrica"
+
+msgid "Product Categories"
+msgstr "Categorías de Productos"
+
+msgid "Browse our wide range of sports equipment by category"
+msgstr "Explore nuestra amplia gama de equipamiento deportivo por categoría"
+
+msgid "products"
+msgstr "productos"
+
+msgid "Featured Products"
+msgstr "Productos Destacados"
+
+msgid "Our most popular wholesale items"
+msgstr "Nuestros artículos mayoristas más populares"
+
+msgid "View All Products"
+msgstr "Ver Todos los Productos"
+
+msgid "No featured products yet."
+msgstr "Aún no hay productos destacados."
+
+msgid "Ready to Place a Wholesale Order?"
+msgstr "¿Listo para hacer un pedido mayorista?"
+
+msgid "Contact us today for competitive pricing and custom branding options."
+msgstr "Contáctenos hoy para precios competitivos y opciones de marca personalizada."
+
+msgid "Request a Quote"
+msgstr "Solicitar Cotización"
+
+msgid "Sort: Newest"
+msgstr "Ordenar: Más Recientes"
+
+msgid "Sort: Price Low to High"
+msgstr "Ordenar: Precio Menor a Mayor"
+
+msgid "Sort: Price High to Low"
+msgstr "Ordenar: Precio Mayor a Menor"
+
+msgid "Sort: Name A-Z"
+msgstr "Ordenar: Nombre A-Z"
+
+msgid "Filter by Material"
+msgstr "Filtrar por Material"
+
+msgid "products found"
+msgstr "productos encontrados"
+
+msgid "No products found matching your criteria."
+msgstr "No se encontraron productos que coincidan con sus criterios."
+
+msgid "Clear Filters"
+msgstr "Limpiar Filtros"
+
+msgid "Browse our complete catalog of wholesale sports equipment"
+msgstr "Explore nuestro catálogo completo de equipamiento deportivo mayorista"
+
+msgid "Breadcrumb"
+msgstr "Migas de Pan"
+
+msgid "Minimum Order Quantity"
+msgstr "Cantidad Mínima de Pedido"
+
+msgid "Featured"
+msgstr "Destacado"
+
+msgid "Get a Quote"
+msgstr "Obtener Cotización"
+
+msgid "Print"
+msgstr "Imprimir"
+
+msgid "Share"
+msgstr "Compartir"
+
+msgid "Product Description"
+msgstr "Descripción del Producto"
+
+msgid "Related Products"
+msgstr "Productos Relacionados"
+
+msgid "Contact Us for a Wholesale Quote"
+msgstr "Contáctenos para una Cotización Mayorista"
+
+msgid "Fill out the form below and our sales team will get back to you within 24 hours."
+msgstr "Complete el formulario a continuación y nuestro equipo de ventas le responderá dentro de 24 horas."
+
+msgid "Full Name"
+msgstr "Nombre Completo"
+
+msgid "Email Address"
+msgstr "Correo Electrónico"
+
+msgid "Phone / WhatsApp"
+msgstr "Teléfono / WhatsApp"
+
+msgid "Interested Product"
+msgstr "Producto de Interés"
+
+msgid "Message"
+msgstr "Mensaje"
+
+msgid "Tell us about your requirements, quantity, customization needs, etc."
+msgstr "Cuéntenos sus requisitos, cantidad, necesidades de personalización, etc."
+
+msgid "Send Inquiry"
+msgstr "Enviar Consulta"
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "MOQ:"
+msgstr "Pedido Mín.:"
+
+msgid "Inquire Now"
+msgstr "Consultar Ahora"
+
+msgid "暂无内容"
+msgstr "Sin contenido"
+
+msgid "暂时没有可显示的文章。"
+msgstr "No hay artículos para mostrar actualmente."
+

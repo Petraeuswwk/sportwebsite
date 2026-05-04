@@ -1,0 +1,706 @@
+# Sports Wholesale Theme - Translation Template
+# Copyright (C) 2025 Sports Wholesale
+# This file is distributed under the same license as the Sports Wholesale theme.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sports Wholesale 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: inc/post-types.php:12
+msgctxt "post type general name"
+msgid "Products"
+msgstr ""
+
+#: inc/post-types.php:13
+msgctxt "post type singular name"
+msgid "Product"
+msgstr ""
+
+#: inc/post-types.php:14
+msgctxt "admin menu"
+msgid "Products"
+msgstr ""
+
+#: inc/post-types.php:15
+msgid "Add New"
+msgstr ""
+
+#: inc/post-types.php:16
+msgid "Add New Product"
+msgstr ""
+
+#: inc/post-types.php:17
+msgid "Edit Product"
+msgstr ""
+
+#: inc/post-types.php:18
+msgid "New Product"
+msgstr ""
+
+#: inc/post-types.php:19
+msgid "View Product"
+msgstr ""
+
+#: inc/post-types.php:20
+msgid "Search Products"
+msgstr ""
+
+#: inc/post-types.php:21
+msgid "No products found"
+msgstr ""
+
+#: inc/post-types.php:22
+msgid "No products found in Trash"
+msgstr ""
+
+#: inc/post-types.php:23
+msgid "All Products"
+msgstr ""
+
+#: inc/post-types.php:56
+msgctxt "taxonomy general name"
+msgid "Product Categories"
+msgstr ""
+
+#: inc/post-types.php:57
+msgctxt "taxonomy singular name"
+msgid "Product Category"
+msgstr ""
+
+#: inc/post-types.php:58
+msgid "Search Categories"
+msgstr ""
+
+#: inc/post-types.php:59
+msgid "All Categories"
+msgstr ""
+
+#: inc/post-types.php:60
+msgid "Parent Category"
+msgstr ""
+
+#: inc/post-types.php:61
+msgid "Parent Category:"
+msgstr ""
+
+#: inc/post-types.php:62
+msgid "Edit Category"
+msgstr ""
+
+#: inc/post-types.php:63
+msgid "Update Category"
+msgstr ""
+
+#: inc/post-types.php:64
+msgid "Add New Category"
+msgstr ""
+
+#: inc/post-types.php:65
+msgid "New Category Name"
+msgstr ""
+
+#: inc/post-types.php:66
+msgid "Categories"
+msgstr ""
+
+#: inc/post-types.php:101
+msgctxt "post type general name"
+msgid "Inquiries"
+msgstr ""
+
+#: inc/post-types.php:102
+msgctxt "post type singular name"
+msgid "Inquiry"
+msgstr ""
+
+#: inc/post-types.php:103
+msgctxt "admin menu"
+msgid "Inquiries"
+msgstr ""
+
+#: inc/post-types.php:107
+msgid "Add New Inquiry"
+msgstr ""
+
+#: inc/post-types.php:108
+msgid "Edit Inquiry"
+msgstr ""
+
+#: inc/post-types.php:109
+msgid "All Inquiries"
+msgstr ""
+
+#: inc/post-types.php:110
+msgid "View Inquiry"
+msgstr ""
+
+#: inc/post-types.php:111
+msgid "Search Inquiries"
+msgstr ""
+
+#: inc/post-types.php:112
+msgid "No inquiries found"
+msgstr ""
+
+#: inc/post-types.php:113
+msgid "No inquiries found in Trash"
+msgstr ""
+
+#: inc/post-types.php:139 inc/meta-boxes.php:46
+msgid "Price"
+msgstr ""
+
+#: inc/post-types.php:140
+msgid "MOQ"
+msgstr ""
+
+#: inc/post-types.php:141
+msgid "Category"
+msgstr ""
+
+#: inc/post-types.php:162
+msgid "Email"
+msgstr ""
+
+#: inc/post-types.php:163
+msgid "Country"
+msgstr ""
+
+#: inc/post-types.php:164
+msgid "Phone/WhatsApp"
+msgstr ""
+
+#: inc/meta-boxes.php:12
+msgid "Product Details"
+msgstr ""
+
+#: inc/meta-boxes.php:25
+msgid "Subtitle / Short Selling Point"
+msgstr ""
+
+#: inc/meta-boxes.php:29
+msgid "Reference Price"
+msgstr ""
+
+#: inc/meta-boxes.php:33
+msgid "Minimum Order Quantity (MOQ)"
+msgstr ""
+
+#: inc/meta-boxes.php:37
+msgid "Material"
+msgstr ""
+
+#: inc/meta-boxes.php:41
+msgid "Featured Product"
+msgstr ""
+
+#: inc/meta-boxes.php:44
+msgid "Mark as featured"
+msgstr ""
+
+#: inc/meta-boxes.php:47
+msgid "Product Gallery"
+msgstr ""
+
+#: inc/meta-boxes.php:68
+msgid "Add Images"
+msgstr ""
+
+#: inc/meta-boxes.php:69
+msgid "Select multiple images for the product gallery."
+msgstr ""
+
+#: inc/meta-boxes.php:82
+msgid "Select Product Images"
+msgstr ""
+
+#: inc/meta-boxes.php:86
+msgid "Add to Gallery"
+msgstr ""
+
+#: inc/inquiry-handler.php:14
+msgid "Select Country"
+msgstr ""
+
+#: inc/inquiry-handler.php:15
+msgid "Saudi Arabia"
+msgstr ""
+
+#: inc/inquiry-handler.php:16
+msgid "United Arab Emirates"
+msgstr ""
+
+#: inc/inquiry-handler.php:17
+msgid "Egypt"
+msgstr ""
+
+#: inc/inquiry-handler.php:18
+msgid "Nigeria"
+msgstr ""
+
+#: inc/inquiry-handler.php:19
+msgid "South Africa"
+msgstr ""
+
+#: inc/inquiry-handler.php:20
+msgid "Kenya"
+msgstr ""
+
+#: inc/inquiry-handler.php:21
+msgid "Ghana"
+msgstr ""
+
+#: inc/inquiry-handler.php:22
+msgid "Brazil"
+msgstr ""
+
+#: inc/inquiry-handler.php:23
+msgid "Mexico"
+msgstr ""
+
+#: inc/inquiry-handler.php:24
+msgid "Colombia"
+msgstr ""
+
+#: inc/inquiry-handler.php:25
+msgid "Argentina"
+msgstr ""
+
+#: inc/inquiry-handler.php:26
+msgid "Chile"
+msgstr ""
+
+#: inc/inquiry-handler.php:27
+msgid "Peru"
+msgstr ""
+
+#: inc/inquiry-handler.php:28
+msgid "Spain"
+msgstr ""
+
+#: inc/inquiry-handler.php:29
+msgid "Portugal"
+msgstr ""
+
+#: inc/inquiry-handler.php:30
+msgid "Italy"
+msgstr ""
+
+#: inc/inquiry-handler.php:31
+msgid "Germany"
+msgstr ""
+
+#: inc/inquiry-handler.php:32
+msgid "France"
+msgstr ""
+
+#: inc/inquiry-handler.php:33
+msgid "United Kingdom"
+msgstr ""
+
+#: inc/inquiry-handler.php:34
+msgid "Turkey"
+msgstr ""
+
+#: inc/inquiry-handler.php:35
+msgid "Iraq"
+msgstr ""
+
+#: inc/inquiry-handler.php:36
+msgid "Jordan"
+msgstr ""
+
+#: inc/inquiry-handler.php:37
+msgid "Lebanon"
+msgstr ""
+
+#: inc/inquiry-handler.php:38
+msgid "Kuwait"
+msgstr ""
+
+#: inc/inquiry-handler.php:39
+msgid "Qatar"
+msgstr ""
+
+#: inc/inquiry-handler.php:40
+msgid "Oman"
+msgstr ""
+
+#: inc/inquiry-handler.php:41
+msgid "Bahrain"
+msgstr ""
+
+#: inc/inquiry-handler.php:42
+msgid "India"
+msgstr ""
+
+#: inc/inquiry-handler.php:43
+msgid "Pakistan"
+msgstr ""
+
+#: inc/inquiry-handler.php:44
+msgid "Bangladesh"
+msgstr ""
+
+#: inc/inquiry-handler.php:45
+msgid "Philippines"
+msgstr ""
+
+#: inc/inquiry-handler.php:46
+msgid "Indonesia"
+msgstr ""
+
+#: inc/inquiry-handler.php:47
+msgid "Malaysia"
+msgstr ""
+
+#: inc/inquiry-handler.php:48
+msgid "Thailand"
+msgstr ""
+
+#: inc/inquiry-handler.php:49
+msgid "Vietnam"
+msgstr ""
+
+#: inc/inquiry-handler.php:50
+msgid "China"
+msgstr ""
+
+#: inc/inquiry-handler.php:51
+msgid "United States"
+msgstr ""
+
+#: inc/inquiry-handler.php:66
+msgid "General Inquiry"
+msgstr ""
+
+#. translators: %s: customer name
+#: inc/inquiry-handler.php:99
+#, php-format
+msgid "[Sports Wholesale] New Inquiry from %s"
+msgstr ""
+
+#: inc/inquiry-handler.php:102
+#, php-format
+msgid "Name: %s"
+msgstr ""
+
+#: inc/inquiry-handler.php:103
+#, php-format
+msgid "Email: %s"
+msgstr ""
+
+#: inc/inquiry-handler.php:104
+#, php-format
+msgid "Phone/WhatsApp: %s"
+msgstr ""
+
+#: inc/inquiry-handler.php:105
+#, php-format
+msgid "Country: %s"
+msgstr ""
+
+#: inc/inquiry-handler.php:106
+#, php-format
+msgid "Interested Product: %s"
+msgstr ""
+
+#: inc/inquiry-handler.php:108
+#, php-format
+msgid "Message: %s"
+msgstr ""
+
+#: inc/theme-setup.php:12
+msgid "Primary Navigation"
+msgstr ""
+
+#: inc/theme-setup.php:67
+msgid "Table Tennis"
+msgstr ""
+
+#: inc/theme-setup.php:68
+msgid "Badminton"
+msgstr ""
+
+#: inc/theme-setup.php:69
+msgid "Tennis"
+msgstr ""
+
+#: inc/theme-setup.php:70
+msgid "Pickleball"
+msgstr ""
+
+#: inc/theme-setup.php:71
+msgid "Jump Rope"
+msgstr ""
+
+#: inc/theme-setup.php:166
+msgid "Inquiry Settings"
+msgstr ""
+
+#: inc/theme-setup.php:167
+msgid "Settings"
+msgstr ""
+
+#: inc/theme-setup.php:170
+msgid "Inquiry emails are sent to the admin email address:"
+msgstr ""
+
+#: header.php:23
+msgid "Toggle navigation"
+msgstr ""
+
+#: header.php:52
+msgid "Home"
+msgstr ""
+
+#: header.php:62
+msgid "Products"
+msgstr ""
+
+#: header.php:67
+msgid "Contact"
+msgstr ""
+
+#: footer.php:24
+msgid "Your trusted partner for high-quality sports equipment at competitive wholesale prices. Serving clients across the Middle East, Africa, South America, and Europe."
+msgstr ""
+
+#: footer.php:30
+msgid "Quick Links"
+msgstr ""
+
+#: footer.php:46
+msgid "Contact Us"
+msgstr ""
+
+#: footer.php:54
+msgid "Follow Us"
+msgstr ""
+
+#: footer.php:62
+msgid "OEM & ODM orders welcome. Custom branding available."
+msgstr ""
+
+#: footer.php:69
+msgid "All rights reserved."
+msgstr ""
+
+#: footer.php:73
+msgid "B2B Wholesale Sports Equipment Supplier"
+msgstr ""
+
+#: front-page.php:24
+msgid "Your inquiry has been sent successfully! We will contact you soon."
+msgstr ""
+
+#: front-page.php:30
+msgid "Please fill in all required fields."
+msgstr ""
+
+#: front-page.php:41
+msgid "High-Quality Sports Equipment at Wholesale Prices"
+msgstr ""
+
+#: front-page.php:45
+msgid "Your trusted B2B supplier for table tennis, badminton, tennis, pickleball, and jump ropes. Competitive pricing with OEM/ODM services available."
+msgstr ""
+
+#: front-page.php:50
+msgid "Browse Products"
+msgstr ""
+
+#: front-page.php:69
+msgid "Quality Guaranteed"
+msgstr ""
+
+#: front-page.php:73
+msgid "Fast Shipping"
+msgstr ""
+
+#: front-page.php:77
+msgid "OEM / ODM Service"
+msgstr ""
+
+#: front-page.php:81
+msgid "Factory Direct Price"
+msgstr ""
+
+#: front-page.php:92
+msgid "Product Categories"
+msgstr ""
+
+#: front-page.php:93
+msgid "Browse our wide range of sports equipment by category"
+msgstr ""
+
+#: front-page.php:118
+msgid "products"
+msgstr ""
+
+#: front-page.php:127
+msgid "Featured Products"
+msgstr ""
+
+#: front-page.php:128
+msgid "Our most popular wholesale items"
+msgstr ""
+
+#: front-page.php:152
+msgid "View All Products"
+msgstr ""
+
+#: front-page.php:155
+msgid "No featured products yet."
+msgstr ""
+
+#: front-page.php:162
+msgid "Ready to Place a Wholesale Order?"
+msgstr ""
+
+#: front-page.php:163
+msgid "Contact us today for competitive pricing and custom branding options."
+msgstr ""
+
+#: front-page.php:165 template-parts/inquiry-form.php:12
+msgid "Request a Quote"
+msgstr ""
+
+#: archive-product.php:44
+msgid "Sort: Newest"
+msgstr ""
+
+#: archive-product.php:45
+msgid "Sort: Price Low to High"
+msgstr ""
+
+#: archive-product.php:46
+msgid "Sort: Price High to Low"
+msgstr ""
+
+#: archive-product.php:47
+msgid "Sort: Name A-Z"
+msgstr ""
+
+#: archive-product.php:56
+msgid "Filter by Material"
+msgstr ""
+
+#: archive-product.php:65
+msgid "products found"
+msgstr ""
+
+#: archive-product.php:85
+msgid "No products found matching your criteria."
+msgstr ""
+
+#: archive-product.php:86
+msgid "Clear Filters"
+msgstr ""
+
+#: archive-product.php:25
+msgid "Browse our complete catalog of wholesale sports equipment"
+msgstr ""
+
+#: single-product.php:30
+msgid "Breadcrumb"
+msgstr ""
+
+#: single-product.php:96
+msgid "Minimum Order Quantity"
+msgstr ""
+
+#: single-product.php:111
+msgid "Featured"
+msgstr ""
+
+#: single-product.php:117
+msgid "Get a Quote"
+msgstr ""
+
+#: single-product.php:121
+msgid "Print"
+msgstr ""
+
+#: single-product.php:125
+msgid "Share"
+msgstr ""
+
+#: single-product.php:134
+msgid "Product Description"
+msgstr ""
+
+#: single-product.php:161
+msgid "Related Products"
+msgstr ""
+
+#: page-inquiry.php:14
+msgid "Contact Us for a Wholesale Quote"
+msgstr ""
+
+#: page-inquiry.php:15
+msgid "Fill out the form below and our sales team will get back to you within 24 hours."
+msgstr ""
+
+#: page-inquiry.php:41 template-parts/inquiry-form.php:28
+msgid "Full Name"
+msgstr ""
+
+#: page-inquiry.php:45 template-parts/inquiry-form.php:32
+msgid "Email Address"
+msgstr ""
+
+#: page-inquiry.php:49 template-parts/inquiry-form.php:36
+msgid "Phone / WhatsApp"
+msgstr ""
+
+#: page-inquiry.php:63 template-parts/inquiry-form.php:50
+msgid "Interested Product"
+msgstr ""
+
+#: page-inquiry.php:67 template-parts/inquiry-form.php:54
+msgid "Message"
+msgstr ""
+
+#: page-inquiry.php:68 template-parts/inquiry-form.php:55
+msgid "Tell us about your requirements, quantity, customization needs, etc."
+msgstr ""
+
+#: page-inquiry.php:75 template-parts/inquiry-form.php:64
+msgid "Send Inquiry"
+msgstr ""
+
+#: template-parts/inquiry-form.php:22
+msgid "Close"
+msgstr ""
+
+#: template-parts/inquiry-form.php:60
+msgid "Cancel"
+msgstr ""
+
+#: template-parts/content-product-card.php:43
+msgid "MOQ:"
+msgstr ""
+
+#: template-parts/content-product-card.php:46
+msgid "Inquire Now"
+msgstr ""
+
+#: index.php:29
+msgid "暂无内容"
+msgstr ""
+
+#: index.php:30
+msgid "暂时没有可显示的文章。"
+msgstr ""
+

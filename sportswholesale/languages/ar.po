@@ -1,0 +1,535 @@
+# Arabic translation for Sports Wholesale theme
+msgid ""
+msgstr ""
+"Project-Id-Version: Sports Wholesale 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Text direction: rtl\n"
+
+msgctxt "post type general name"
+msgid "Products"
+msgstr "المنتجات"
+
+msgctxt "post type singular name"
+msgid "Product"
+msgstr "المنتج"
+
+msgctxt "admin menu"
+msgid "Products"
+msgstr "المنتجات"
+
+msgid "Add New"
+msgstr "إضافة جديد"
+
+msgid "Add New Product"
+msgstr "إضافة منتج جديد"
+
+msgid "Edit Product"
+msgstr "تعديل المنتج"
+
+msgid "New Product"
+msgstr "منتج جديد"
+
+msgid "View Product"
+msgstr "عرض المنتج"
+
+msgid "Search Products"
+msgstr "البحث في المنتجات"
+
+msgid "No products found"
+msgstr "لم يتم العثور على منتجات"
+
+msgid "No products found in Trash"
+msgstr "لم يتم العثور على منتجات في سلة المهملات"
+
+msgid "All Products"
+msgstr "جميع المنتجات"
+
+msgctxt "taxonomy general name"
+msgid "Product Categories"
+msgstr "فئات المنتجات"
+
+msgctxt "taxonomy singular name"
+msgid "Product Category"
+msgstr "فئة المنتج"
+
+msgid "Search Categories"
+msgstr "البحث في الفئات"
+
+msgid "All Categories"
+msgstr "جميع الفئات"
+
+msgid "Parent Category"
+msgstr "الفئة الأم"
+
+msgid "Parent Category:"
+msgstr "الفئة الأم:"
+
+msgid "Edit Category"
+msgstr "تعديل الفئة"
+
+msgid "Update Category"
+msgstr "تحديث الفئة"
+
+msgid "Add New Category"
+msgstr "إضافة فئة جديدة"
+
+msgid "New Category Name"
+msgstr "اسم الفئة الجديدة"
+
+msgid "Categories"
+msgstr "الفئات"
+
+msgctxt "post type general name"
+msgid "Inquiries"
+msgstr "الاستفسارات"
+
+msgctxt "post type singular name"
+msgid "Inquiry"
+msgstr "استفسار"
+
+msgctxt "admin menu"
+msgid "Inquiries"
+msgstr "الاستفسارات"
+
+msgid "Add New Inquiry"
+msgstr "إضافة استفسار جديد"
+
+msgid "Edit Inquiry"
+msgstr "تعديل الاستفسار"
+
+msgid "All Inquiries"
+msgstr "جميع الاستفسارات"
+
+msgid "View Inquiry"
+msgstr "عرض الاستفسار"
+
+msgid "Search Inquiries"
+msgstr "البحث في الاستفسارات"
+
+msgid "No inquiries found"
+msgstr "لم يتم العثور على استفسارات"
+
+msgid "No inquiries found in Trash"
+msgstr "لم يتم العثور على استفسارات في سلة المهملات"
+
+msgid "Price"
+msgstr "السعر"
+
+msgid "MOQ"
+msgstr "الحد الأدنى للطلب"
+
+msgid "Category"
+msgstr "الفئة"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Country"
+msgstr "الدولة"
+
+msgid "Phone/WhatsApp"
+msgstr "الهاتف/واتساب"
+
+msgid "Product Details"
+msgstr "تفاصيل المنتج"
+
+msgid "Subtitle / Short Selling Point"
+msgstr "العنوان الفرعي / نقطة البيع"
+
+msgid "Reference Price"
+msgstr "السعر المرجعي"
+
+msgid "Minimum Order Quantity (MOQ)"
+msgstr "الحد الأدنى للطلب"
+
+msgid "Material"
+msgstr "المادة"
+
+msgid "Featured Product"
+msgstr "منتج مميز"
+
+msgid "Mark as featured"
+msgstr "تحديد كمميز"
+
+msgid "Product Gallery"
+msgstr "معرض صور المنتج"
+
+msgid "Add Images"
+msgstr "إضافة صور"
+
+msgid "Select multiple images for the product gallery."
+msgstr "حدد عدة صور لمعرض المنتج."
+
+msgid "Select Product Images"
+msgstr "اختر صور المنتج"
+
+msgid "Add to Gallery"
+msgstr "إضافة إلى المعرض"
+
+msgid "Select Country"
+msgstr "اختر الدولة"
+
+msgid "Saudi Arabia"
+msgstr "المملكة العربية السعودية"
+
+msgid "United Arab Emirates"
+msgstr "الإمارات العربية المتحدة"
+
+msgid "Egypt"
+msgstr "مصر"
+
+msgid "Nigeria"
+msgstr "نيجيريا"
+
+msgid "South Africa"
+msgstr "جنوب أفريقيا"
+
+msgid "Kenya"
+msgstr "كينيا"
+
+msgid "Ghana"
+msgstr "غانا"
+
+msgid "Brazil"
+msgstr "البرازيل"
+
+msgid "Mexico"
+msgstr "المكسيك"
+
+msgid "Colombia"
+msgstr "كولومبيا"
+
+msgid "Argentina"
+msgstr "الأرجنتين"
+
+msgid "Chile"
+msgstr "تشيلي"
+
+msgid "Peru"
+msgstr "بيرو"
+
+msgid "Spain"
+msgstr "إسبانيا"
+
+msgid "Portugal"
+msgstr "البرتغال"
+
+msgid "Italy"
+msgstr "إيطاليا"
+
+msgid "Germany"
+msgstr "ألمانيا"
+
+msgid "France"
+msgstr "فرنسا"
+
+msgid "United Kingdom"
+msgstr "المملكة المتحدة"
+
+msgid "Turkey"
+msgstr "تركيا"
+
+msgid "Iraq"
+msgstr "العراق"
+
+msgid "Jordan"
+msgstr "الأردن"
+
+msgid "Lebanon"
+msgstr "لبنان"
+
+msgid "Kuwait"
+msgstr "الكويت"
+
+msgid "Qatar"
+msgstr "قطر"
+
+msgid "Oman"
+msgstr "عُمان"
+
+msgid "Bahrain"
+msgstr "البحرين"
+
+msgid "India"
+msgstr "الهند"
+
+msgid "Pakistan"
+msgstr "باكستان"
+
+msgid "Bangladesh"
+msgstr "بنغلاديش"
+
+msgid "Philippines"
+msgstr "الفلبين"
+
+msgid "Indonesia"
+msgstr "إندونيسيا"
+
+msgid "Malaysia"
+msgstr "ماليزيا"
+
+msgid "Thailand"
+msgstr "تايلاند"
+
+msgid "Vietnam"
+msgstr "فيتنام"
+
+msgid "China"
+msgstr "الصين"
+
+msgid "United States"
+msgstr "الولايات المتحدة"
+
+msgid "General Inquiry"
+msgstr "استفسار عام"
+
+#, php-format
+msgid "[Sports Wholesale] New Inquiry from %s"
+msgstr "[جملة الرياضة] استفسار جديد من %s"
+
+#, php-format
+msgid "Name: %s"
+msgstr "الاسم: %s"
+
+#, php-format
+msgid "Email: %s"
+msgstr "البريد الإلكتروني: %s"
+
+#, php-format
+msgid "Phone/WhatsApp: %s"
+msgstr "الهاتف/واتساب: %s"
+
+#, php-format
+msgid "Country: %s"
+msgstr "الدولة: %s"
+
+#, php-format
+msgid "Interested Product: %s"
+msgstr "المنتج المطلوب: %s"
+
+#, php-format
+msgid "Message: %s"
+msgstr "الرسالة: %s"
+
+msgid "Primary Navigation"
+msgstr "التنقل الرئيسي"
+
+msgid "Table Tennis"
+msgstr "تنس الطاولة"
+
+msgid "Badminton"
+msgstr "تنس الريشة"
+
+msgid "Tennis"
+msgstr "التنس"
+
+msgid "Pickleball"
+msgstr "بيكلبول"
+
+msgid "Jump Rope"
+msgstr "حبل القفز"
+
+msgid "Inquiry Settings"
+msgstr "إعدادات الاستفسارات"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Inquiry emails are sent to the admin email address:"
+msgstr "يتم إرسال رسائل الاستفسار إلى البريد الإلكتروني للمسؤول:"
+
+msgid "Toggle navigation"
+msgstr "تبديل التنقل"
+
+msgid "Home"
+msgstr "الرئيسية"
+
+msgid "Products"
+msgstr "المنتجات"
+
+msgid "Contact"
+msgstr "اتصل بنا"
+
+msgid "Your trusted partner for high-quality sports equipment at competitive wholesale prices. Serving clients across the Middle East, Africa, South America, and Europe."
+msgstr "شريكك الموثوق لمعدات رياضية عالية الجودة بأسعار الجملة. نخدم العملاء في الشرق الأوسط وأفريقيا وأمريكا الجنوبية وأوروبا."
+
+msgid "Quick Links"
+msgstr "روابط سريعة"
+
+msgid "Contact Us"
+msgstr "اتصل بنا"
+
+msgid "Follow Us"
+msgstr "تابعنا"
+
+msgid "OEM & ODM orders welcome. Custom branding available."
+msgstr "مرحباً بطلبات OEM و ODM. العلامة التجارية المخصصة متاحة."
+
+msgid "All rights reserved."
+msgstr "جميع الحقوق محفوظة."
+
+msgid "B2B Wholesale Sports Equipment Supplier"
+msgstr "_supplier معدات رياضية بالجملة B2B_"
+
+msgid "Your inquiry has been sent successfully! We will contact you soon."
+msgstr "تم إرسال استفسارك بنجاح! سنتواصل معك قريباً."
+
+msgid "Please fill in all required fields."
+msgstr "يرجى ملء جميع الحقول المطلوبة."
+
+msgid "High-Quality Sports Equipment at Wholesale Prices"
+msgstr "معدات رياضية عالية الجودة بأسعار الجملة"
+
+msgid "Your trusted B2B supplier for table tennis, badminton, tennis, pickleball, and jump ropes. Competitive pricing with OEM/ODM services available."
+msgstr "مورِدك الموثوق لرياضات تنس الطاولة وتنس الريشة والتنس وبيكلبول وحبل القفز. أسعار تنافسية مع خدمات OEM/ODM."
+
+msgid "Browse Products"
+msgstr "تصفح المنتجات"
+
+msgid "Quality Guaranteed"
+msgstr "جودة مضمونة"
+
+msgid "Fast Shipping"
+msgstr "شحن سريع"
+
+msgid "OEM / ODM Service"
+msgstr "خدمة OEM / ODM"
+
+msgid "Factory Direct Price"
+msgstr "سعر المصنع مباشرة"
+
+msgid "Product Categories"
+msgstr "فئات المنتجات"
+
+msgid "Browse our wide range of sports equipment by category"
+msgstr "تصفح مجموعتنا الواسعة من المعدات الرياضية حسب الفئة"
+
+msgid "products"
+msgstr "منتجات"
+
+msgid "Featured Products"
+msgstr "منتجات مميزة"
+
+msgid "Our most popular wholesale items"
+msgstr "أكثر منتجاتنا الجملة شعبية"
+
+msgid "View All Products"
+msgstr "عرض جميع المنتجات"
+
+msgid "No featured products yet."
+msgstr "لا توجد منتجات مميزة بعد."
+
+msgid "Ready to Place a Wholesale Order?"
+msgstr "هل أنت مستعد لطلب بالجملة؟"
+
+msgid "Contact us today for competitive pricing and custom branding options."
+msgstr "اتصل بنا اليوم للحصول على أسعار تنافسية وخيارات العلامة التجارية المخصصة."
+
+msgid "Request a Quote"
+msgstr "طلب عرض سعر"
+
+msgid "Sort: Newest"
+msgstr "ترتيب: الأحدث"
+
+msgid "Sort: Price Low to High"
+msgstr "ترتيب: السعر من الأقل إلى الأعلى"
+
+msgid "Sort: Price High to Low"
+msgstr "ترتيب: السعر من الأعلى إلى الأقل"
+
+msgid "Sort: Name A-Z"
+msgstr "ترتيب: الاسم أ-ي"
+
+msgid "Filter by Material"
+msgstr "تصفية حسب المادة"
+
+msgid "products found"
+msgstr "منتجات"
+
+msgid "No products found matching your criteria."
+msgstr "لم يتم العثور على منتجات تطابق معاييرك."
+
+msgid "Clear Filters"
+msgstr "مسح الفلاتر"
+
+msgid "Browse our complete catalog of wholesale sports equipment"
+msgstr "تصفح كتالوجنا الكامل للمعدات الرياضية بالجملة"
+
+msgid "Breadcrumb"
+msgstr "مسار التنقل"
+
+msgid "Minimum Order Quantity"
+msgstr "الحد الأدنى للطلب"
+
+msgid "Featured"
+msgstr "مميز"
+
+msgid "Get a Quote"
+msgstr "احصل على عرض سعر"
+
+msgid "Print"
+msgstr "طباعة"
+
+msgid "Share"
+msgstr "مشاركة"
+
+msgid "Product Description"
+msgstr "وصف المنتج"
+
+msgid "Related Products"
+msgstr "منتجات ذات صلة"
+
+msgid "Contact Us for a Wholesale Quote"
+msgstr "اتصل بنا للحصول على عرض سعر بالجملة"
+
+msgid "Fill out the form below and our sales team will get back to you within 24 hours."
+msgstr "املأ النموذج أدناه وسيرد عليك فريق المبيعات خلال 24 ساعة."
+
+msgid "Full Name"
+msgstr "الاسم الكامل"
+
+msgid "Email Address"
+msgstr "البريد الإلكتروني"
+
+msgid "Phone / WhatsApp"
+msgstr "الهاتف / واتساب"
+
+msgid "Interested Product"
+msgstr "المنتج المطلوب"
+
+msgid "Message"
+msgstr "الرسالة"
+
+msgid "Tell us about your requirements, quantity, customization needs, etc."
+msgstr "أخبرنا عن متطلباتك والכמות واحتياجات التخصيص إلخ."
+
+msgid "Send Inquiry"
+msgstr "إرسال الاستفسار"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "MOQ:"
+msgstr "الحد الأدنى:"
+
+msgid "Inquire Now"
+msgstr "استفسر الآن"
+
+msgid "暂无内容"
+msgstr "لا يوجد محتوى"
+
+msgid "暂时没有可显示的文章。"
+msgstr "لا توجد مقالات لعرضها حالياً."
+
