@@ -24,6 +24,7 @@ defined( 'ABSPATH' ) || exit;
             <a class="navbar-brand d-flex align-items-center" href="<?php echo esc_url( home_url( '/' ) ); ?>">
                 <?php if ( has_custom_logo() ) : ?>
                     <?php the_custom_logo(); ?>
+                    <span class="brand-name ms-2">MAGICALL</span>
                 <?php else : ?>
                     <span class="fw-bold fs-5 text-primary">
                         <i class="bi bi-trophy me-2"></i><?php bloginfo( 'name' ); ?>

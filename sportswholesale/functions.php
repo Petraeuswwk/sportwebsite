@@ -21,30 +21,33 @@ require_once get_template_directory() . '/inc/post-types.php';
 require_once get_template_directory() . '/inc/meta-boxes.php';
 require_once get_template_directory() . '/inc/inquiry-handler.php';
 require_once get_template_directory() . '/inc/theme-setup.php';
+require_once get_template_directory() . '/inc/excel-importer.php';
+require_once get_template_directory() . '/inc/multilingual.php';
+require_once get_template_directory() . '/inc/translations.php';
 
 /**
  * Fallback navigation menu when no menu is assigned.
  */
 function sportswholesale_fallback_menu() {
     echo '<ul class="navbar-nav me-auto mb-2 mb-lg-0">';
-    echo '<li class="nav-item"><a class="nav-link" href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'sportswholesale' ) . '</a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( sw_t( 'Home' ) ) . '</a></li>';
 
     $categories = get_terms( [ 'taxonomy' => 'product_category', 'hide_empty' => false ] );
     if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) {
         echo '<li class="nav-item dropdown">';
-        echo '<a class="nav-link dropdown-toggle" href="' . esc_url( get_post_type_archive_link( 'product' ) ) . '" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . esc_html__( 'Products', 'sportswholesale' ) . '</a>';
+        echo '<a class="nav-link dropdown-toggle" href="' . esc_url( get_post_type_archive_link( 'product' ) ) . '" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . esc_html( sw_t( 'Products' ) ) . '</a>';
         echo '<ul class="dropdown-menu">';
-        echo '<li><a class="dropdown-item" href="' . esc_url( get_post_type_archive_link( 'product' ) ) . '">' . esc_html__( 'All Products', 'sportswholesale' ) . '</a></li>';
+        echo '<li><a class="dropdown-item" href="' . esc_url( get_post_type_archive_link( 'product' ) ) . '">' . esc_html( sw_t( 'All Products' ) ) . '</a></li>';
         echo '<li><hr class="dropdown-divider"></li>';
         foreach ( $categories as $cat ) {
-            echo '<li><a class="dropdown-item" href="' . esc_url( get_term_link( $cat ) ) . '">' . esc_html( $cat->name ) . '</a></li>';
+            echo '<li><a class="dropdown-item" href="' . esc_url( get_term_link( $cat ) ) . '">' . esc_html( sw_translate_category( $cat->name ) ) . '</a></li>';
         }
         echo '</ul></li>';
     } else {
-        echo '<li class="nav-item"><a class="nav-link" href="' . esc_url( get_post_type_archive_link( 'product' ) ) . '">' . esc_html__( 'Products', 'sportswholesale' ) . '</a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="' . esc_url( get_post_type_archive_link( 'product' ) ) . '">' . esc_html( sw_t( 'Products' ) ) . '</a></li>';
     }
 
-    echo '<li class="nav-item"><a class="nav-link" href="#contact">' . esc_html__( 'Contact', 'sportswholesale' ) . '</a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="#contact">' . esc_html( sw_t( 'Contact' ) ) . '</a></li>';
     echo '</ul>';
 }
 
@@ -95,11 +98,14 @@ function sportswholesale_get_product_categories( $post_id = null ) {
  */
 function sportswholesale_get_category_icon( $slug ) {
     $icons = apply_filters( 'sportswholesale_category_icons', [
-        'table-tennis' => 'bi-circle',
-        'badminton'    => 'bi-egg',
-        'tennis'       => 'bi-record-circle',
-        'pickleball'   => 'bi-hexagon',
-        'jump-rope'    => 'bi-arrow-repeat',
+        'table-tennis'       => 'bi-circle',
+        'table-tennis-racket'=> 'bi-circle',
+        'badminton'          => 'bi-egg',
+        'badminton-racket'   => 'bi-egg',
+        'tennis'             => 'bi-record-circle',
+        'pickleball'         => 'bi-hexagon',
+        'jump-rope'          => 'bi-arrow-repeat',
+        'grip-strengthener'  => 'bi-hand-index-thumb',
     ] );
     return isset( $icons[ $slug ] ) ? $icons[ $slug ] : 'bi-tag';
 }
@@ -109,11 +115,14 @@ function sportswholesale_get_category_icon( $slug ) {
  */
 function sportswholesale_get_category_color( $slug ) {
     $colors = apply_filters( 'sportswholesale_category_colors', [
-        'table-tennis' => '#e74c3c',
-        'badminton'    => '#2ecc71',
-        'tennis'       => '#f1c40f',
-        'pickleball'   => '#3498db',
-        'jump-rope'    => '#9b59b6',
+        'table-tennis'       => '#e74c3c',
+        'table-tennis-racket'=> '#e74c3c',
+        'badminton'          => '#2ecc71',
+        'badminton-racket'   => '#2ecc71',
+        'tennis'             => '#f1c40f',
+        'pickleball'         => '#3498db',
+        'jump-rope'          => '#9b59b6',
+        'grip-strengthener'  => '#e67e22',
     ] );
     return isset( $colors[ $slug ] ) ? $colors[ $slug ] : '#95a5a6';
 }

@@ -2,13 +2,156 @@
  * Sports Wholesale Theme - Main JavaScript
  *
  * Handles: inquiry modal, gallery switching, form validation,
- * share button, toast notifications.
+ * share button, toast notifications, inquiry cart.
  *
  * @package SportsWholesale
  */
 
 (function () {
     'use strict';
+
+    /* ==========================================================
+       Inquiry Cart (localStorage based)
+       ========================================================== */
+    var INQUIRY_CART_KEY = 'sw_inquiry_cart';
+
+    function getCart() {
+        try {
+            var data = localStorage.getItem(INQUIRY_CART_KEY);
+            return data ? JSON.parse(data) : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveCart(cart) {
+        try {
+            localStorage.setItem(INQUIRY_CART_KEY, JSON.stringify(cart));
+        } catch (e) {}
+    }
+
+    function addToCart(productId, productName) {
+        var cart = getCart();
+        var exists = cart.some(function (item) { return item.id === productId; });
+        if (exists) return false;
+        
+        cart.push({ id: productId, name: productName });
+        saveCart(cart);
+        updateCartUI();
+        return true;
+    }
+
+    function removeFromCart(productId) {
+        var cart = getCart().filter(function (item) { return item.id !== productId; });
+        saveCart(cart);
+        updateCartUI();
+        renderCartItems();
+    }
+
+    function clearCart() {
+        saveCart([]);
+        updateCartUI();
+        renderCartItems();
+    }
+
+    function updateCartUI() {
+        var cart = getCart();
+        var count = cart.length;
+        
+        // Update floating button
+        var cartBtn = document.getElementById('sw-inquiry-cart-btn');
+        var cartCount = document.getElementById('sw-cart-count');
+        
+        if (cartBtn) {
+            if (count > 0) {
+                cartBtn.classList.remove('d-none');
+            } else {
+                cartBtn.classList.add('d-none');
+            }
+        }
+        
+        if (cartCount) {
+            cartCount.textContent = count;
+        }
+        
+        // Update add-to-cart buttons
+        document.querySelectorAll('.sw-add-to-inquiry').forEach(function (btn) {
+            var productId = btn.getAttribute('data-product-id');
+            var inCart = cart.some(function (item) { return item.id === productId; });
+            
+            if (inCart) {
+                btn.classList.remove('btn-outline-secondary');
+                btn.classList.add('btn-success');
+                btn.querySelector('i').className = 'bi bi-cart-check';
+                btn.disabled = true;
+            } else {
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+                btn.querySelector('i').className = 'bi bi-cart-plus';
+                btn.disabled = false;
+            }
+        });
+        
+        // Update hidden field for form submission
+        var productsField = document.getElementById('sw_products');
+        if (productsField) {
+            productsField.value = cart.map(function (item) { return item.name; }).join('|');
+        }
+        
+        // Update selected products display
+        var selectedProducts = document.getElementById('sw-selected-products');
+        if (selectedProducts) {
+            if (count > 0) {
+                selectedProducts.innerHTML = cart.map(function (item) {
+                    return '<span class="badge bg-primary me-1 mb-1">' + 
+                           escapeHtml(item.name) + 
+                           ' <button type="button" class="btn-close btn-close-white ms-1" data-remove-id="' + 
+                           item.id + '" style="font-size:0.6em;"></button></span>';
+                }).join('');
+            } else {
+                selectedProducts.innerHTML = '';
+            }
+        }
+        
+        // Update submit button
+        var submitBtn = document.getElementById('sw-submit-cart-inquiry');
+        if (submitBtn) {
+            submitBtn.disabled = count === 0;
+        }
+    }
+
+    function renderCartItems() {
+        var cart = getCart();
+        var emptyEl = document.getElementById('sw-cart-empty');
+        var itemsEl = document.getElementById('sw-cart-items');
+        var tbody = document.getElementById('sw-cart-table-body');
+        
+        if (!emptyEl || !itemsEl || !tbody) return;
+        
+        if (cart.length === 0) {
+            emptyEl.classList.remove('d-none');
+            itemsEl.classList.add('d-none');
+            return;
+        }
+        
+        emptyEl.classList.add('d-none');
+        itemsEl.classList.remove('d-none');
+        
+        tbody.innerHTML = cart.map(function (item, index) {
+            return '<tr>' +
+                '<td>' + escapeHtml(item.name) + '</td>' +
+                '<td>-</td>' +
+                '<td class="text-center"><input type="number" class="form-control form-control-sm mx-auto" style="width:70px" min="1" value="1" data-qty-id="' + item.id + '"></td>' +
+                '<td class="text-end"><button type="button" class="btn btn-outline-danger btn-sm" data-remove-id="' + item.id + '"><i class="bi bi-trash"></i></button></td>' +
+                '</tr>';
+        }).join('');
+    }
+
+    function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
 
     /* ==========================================================
        Inquiry Modal Handler
@@ -31,6 +174,87 @@
             var bsModal = bootstrap.Modal.getOrCreateInstance(modal);
             bsModal.show();
         });
+    }
+
+    /* ==========================================================
+       Inquiry Cart Buttons Handler
+       ========================================================== */
+    function initInquiryCart() {
+        // Add to cart buttons
+        document.addEventListener('click', function (e) {
+            var btn = e.target.closest('.sw-add-to-inquiry');
+            if (!btn) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var productId = btn.getAttribute('data-product-id');
+            var productName = btn.getAttribute('data-product-name');
+            
+            if (addToCart(productId, productName)) {
+                // Show brief feedback
+                var originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="bi bi-check"></i>';
+                setTimeout(function () {
+                    btn.innerHTML = originalHtml;
+                }, 1000);
+            }
+        });
+        
+        // Open cart button
+        var openCartBtn = document.getElementById('sw-open-cart');
+        if (openCartBtn) {
+            openCartBtn.addEventListener('click', function () {
+                renderCartItems();
+                var modal = document.getElementById('inquiryCartModal');
+                if (modal) {
+                    var bsModal = bootstrap.Modal.getOrCreateInstance(modal);
+                    bsModal.show();
+                }
+            });
+        }
+        
+        // Clear cart button
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('#sw-clear-cart')) {
+                clearCart();
+            }
+        });
+        
+        // Remove item buttons (in cart modal and form)
+        document.addEventListener('click', function (e) {
+            var removeBtn = e.target.closest('[data-remove-id]');
+            if (removeBtn) {
+                var productId = removeBtn.getAttribute('data-remove-id');
+                removeFromCart(productId);
+            }
+        });
+        
+        // Submit cart inquiry button
+        var submitCartBtn = document.getElementById('sw-submit-cart-inquiry');
+        if (submitCartBtn) {
+            submitCartBtn.addEventListener('click', function () {
+                var cart = getCart();
+                if (cart.length === 0) return;
+                
+                // Close cart modal
+                var cartModal = document.getElementById('inquiryCartModal');
+                if (cartModal) {
+                    var bsCartModal = bootstrap.Modal.getInstance(cartModal);
+                    if (bsCartModal) bsCartModal.hide();
+                }
+                
+                // Open inquiry modal
+                var inquiryModal = document.getElementById('inquiryModal');
+                if (inquiryModal) {
+                    var bsInquiryModal = bootstrap.Modal.getOrCreateInstance(inquiryModal);
+                    bsInquiryModal.show();
+                }
+            });
+        }
+        
+        // Initialize cart UI on load
+        updateCartUI();
     }
 
     /* ==========================================================
@@ -251,6 +475,7 @@
        ========================================================== */
     document.addEventListener('DOMContentLoaded', function () {
         initInquiryButtons();
+        initInquiryCart();
         initInquiryForm();
         initGallery();
         initShareButton();

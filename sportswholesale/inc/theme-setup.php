@@ -15,9 +15,9 @@ add_action( 'after_setup_theme', function () {
         'primary' => __( 'Primary Navigation', 'sportswholesale' ),
     ] );
 
-    // Add image sizes
-    add_image_size( 'product-card', 400, 300, true );
-    add_image_size( 'product-gallery', 800, 600, true );
+    // Add image sizes - use square for product cards (most images are portrait)
+    add_image_size( 'product-card', 400, 400, [ 'center', 'center' ] );
+    add_image_size( 'product-gallery', 800, 600, false );
     add_image_size( 'hero-banner', 1200, 500, true );
 
     // Enable featured images

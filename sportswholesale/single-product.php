@@ -57,10 +57,10 @@ while ( have_posts() ) :
     <!-- Breadcrumb -->
     <nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'sportswholesale' ); ?>" class="mb-3">
         <ol class="breadcrumb small">
-            <li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-decoration-none"><?php esc_html_e( 'Home', 'sportswholesale' ); ?></a></li>
-            <li class="breadcrumb-item"><a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>" class="text-decoration-none"><?php esc_html_e( 'Products', 'sportswholesale' ); ?></a></li>
+            <li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-decoration-none"><?php echo esc_html( sw_t( 'Home' ) ); ?></a></li>
+            <li class="breadcrumb-item"><a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>" class="text-decoration-none"><?php echo esc_html( sw_t( 'Products' ) ); ?></a></li>
             <?php if ( $cat_terms && ! is_wp_error( $cat_terms ) ) : ?>
-                <li class="breadcrumb-item"><a href="<?php echo esc_url( get_term_link( $cat_terms[0] ) ); ?>" class="text-decoration-none"><?php echo esc_html( $cat_name ); ?></a></li>
+                <li class="breadcrumb-item"><a href="<?php echo esc_url( get_term_link( $cat_terms[0] ) ); ?>" class="text-decoration-none"><?php echo esc_html( sw_translate_category( $cat_name ) ); ?></a></li>
             <?php endif; ?>
             <li class="breadcrumb-item active" aria-current="page"><?php the_title(); ?></li>
         </ol>
@@ -96,17 +96,17 @@ while ( have_posts() ) :
         <!-- Product Info -->
         <div class="col-lg-6">
             <?php if ( $cat_name ) : ?>
-                <a href="<?php echo esc_url( get_term_link( $cat_terms[0] ) ); ?>" class="badge text-decoration-none mb-2" style="background-color:<?php echo esc_attr( sportswholesale_get_category_color( $cat_slug ) ); ?>;"><?php echo esc_html( $cat_name ); ?></a>
+                <a href="<?php echo esc_url( get_term_link( $cat_terms[0] ) ); ?>" class="badge text-decoration-none mb-2" style="background-color:<?php echo esc_attr( sportswholesale_get_category_color( $cat_slug ) ); ?>;"><?php echo esc_html( sw_translate_category( $cat_name ) ); ?></a>
             <?php endif; ?>
 
             <h1 class="h3 mb-2"><?php the_title(); ?></h1>
 
             <?php if ( $subtitle ) : ?>
-                <p class="text-muted mb-3"><?php echo esc_html( $subtitle ); ?></p>
+                <p class="text-muted mb-3"><?php echo esc_html( sw_translate_quantity( $subtitle ) ); ?></p>
             <?php endif; ?>
 
             <?php if ( $featured ) : ?>
-                <span class="badge bg-warning text-dark mb-3"><i class="bi bi-star-fill me-1"></i><?php esc_html_e( 'Featured', 'sportswholesale' ); ?></span>
+                <span class="badge bg-warning text-dark mb-3"><i class="bi bi-star-fill me-1"></i><?php echo esc_html( sw_t( 'Featured' ) ); ?></span>
             <?php endif; ?>
 
             <!-- Product Details Table -->
@@ -114,20 +114,20 @@ while ( have_posts() ) :
                 <div class="card-body">
                     <?php if ( $price ) : ?>
                         <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
-                            <span class="text-muted"><?php esc_html_e( 'Reference Price', 'sportswholesale' ); ?></span>
-                            <span class="fw-bold text-primary fs-5"><?php echo esc_html( $price ); ?></span>
+                            <span class="text-muted"><?php echo esc_html( sw_t( 'Reference Price' ) ); ?></span>
+                            <span class="fw-bold text-primary fs-5"><?php echo esc_html( sw_translate_price( $price ) ); ?></span>
                         </div>
                     <?php endif; ?>
                     <?php if ( $moq ) : ?>
                         <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
-                            <span class="text-muted"><?php esc_html_e( 'Minimum Order Quantity', 'sportswholesale' ); ?></span>
-                            <span class="fw-semibold"><?php echo esc_html( $moq ); ?></span>
+                            <span class="text-muted"><?php echo esc_html( sw_t( 'MOQ' ) ); ?></span>
+                            <span class="fw-semibold"><?php echo esc_html( sw_translate_moq( $moq ) ); ?></span>
                         </div>
                     <?php endif; ?>
                     <?php if ( $material ) : ?>
                         <div class="d-flex justify-content-between">
-                            <span class="text-muted"><?php esc_html_e( 'Material', 'sportswholesale' ); ?></span>
-                            <span class="fw-semibold"><?php echo esc_html( $material ); ?></span>
+                            <span class="text-muted"><?php echo esc_html( sw_t( 'Material' ) ); ?></span>
+                            <span class="fw-semibold"><?php echo esc_html( sw_translate_meta( $material ) ); ?></span>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -136,7 +136,7 @@ while ( have_posts() ) :
             <!-- Action Buttons -->
             <div class="d-flex gap-2 mb-4">
                 <button type="button" class="btn btn-primary btn-lg flex-grow-1 sw-inquiry-btn" data-product="<?php echo esc_attr( get_the_title() ); ?>">
-                    <i class="bi bi-envelope me-2"></i><?php esc_html_e( 'Get a Quote', 'sportswholesale' ); ?>
+                    <i class="bi bi-envelope me-2"></i><?php echo esc_html( sw_t( 'Get a Quote' ) ); ?>
                 </button>
                 <button type="button" class="btn btn-outline-secondary btn-lg" onclick="window.print();" title="<?php esc_attr_e( 'Print', 'sportswholesale' ); ?>">
                     <i class="bi bi-printer"></i>
@@ -149,7 +149,7 @@ while ( have_posts() ) :
             <!-- Description -->
             <?php if ( get_the_content() ) : ?>
                 <div class="product-description">
-                    <h3 class="h5 mb-3"><?php esc_html_e( 'Product Description', 'sportswholesale' ); ?></h3>
+                    <h3 class="h5 mb-3"><?php echo esc_html( sw_t( 'Product Description' ) ); ?></h3>
                     <div class="content-area">
                         <?php the_content(); ?>
                     </div>
@@ -181,7 +181,7 @@ while ( have_posts() ) :
 
     if ( $related->have_posts() ) : ?>
         <section class="mt-5 pt-4 border-top">
-            <h2 class="h4 mb-4"><?php esc_html_e( 'Related Products', 'sportswholesale' ); ?></h2>
+            <h2 class="h4 mb-4"><?php echo esc_html( sw_t( 'Related Products' ) ); ?></h2>
             <div class="row g-4">
                 <?php while ( $related->have_posts() ) : $related->the_post(); ?>
                     <div class="col-md-6 col-lg-3">

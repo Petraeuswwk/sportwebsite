@@ -32,29 +32,20 @@ $inquiry_status = isset( $_GET['inquiry'] ) ? sanitize_text_field( wp_unslash( $
 <section class="hero-section bg-primary text-white py-5">
     <div class="container">
         <div class="row align-items-center min-vh-50">
-            <div class="col-lg-7">
+            <div class="col-lg-8 mx-auto text-center">
                 <h1 class="display-4 fw-bold mb-3">
-                    <?php esc_html_e( 'High-Quality Sports Equipment at Wholesale Prices', 'sportswholesale' ); ?>
+                    <?php echo esc_html( sw_t( 'High-Quality Sports Equipment at Wholesale Prices' ) ); ?>
                 </h1>
                 <p class="lead mb-4 opacity-90">
-                    <?php esc_html_e( 'Your trusted B2B supplier for table tennis, badminton, tennis, pickleball, and jump ropes. Competitive pricing with OEM/ODM services available.', 'sportswholesale' ); ?>
+                    <?php echo esc_html( sw_t( 'Your trusted B2B supplier for table tennis, badminton, tennis, pickleball, and jump ropes. Competitive pricing with OEM/ODM services available.' ) ); ?>
                 </p>
-                <div class="d-flex flex-wrap gap-3">
+                <div class="d-flex flex-wrap justify-content-center gap-3">
                     <a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>" class="btn btn-light btn-lg px-4">
-                        <i class="bi bi-grid me-2"></i><?php esc_html_e( 'Browse Products', 'sportswholesale' ); ?>
+                        <i class="bi bi-grid me-2"></i><?php echo esc_html( sw_t( 'Browse Products' ) ); ?>
                     </a>
                     <a href="#contact" class="btn btn-outline-light btn-lg px-4">
-                        <i class="bi bi-envelope me-2"></i><?php esc_html_e( 'Contact Us', 'sportswholesale' ); ?>
+                        <i class="bi bi-envelope me-2"></i><?php echo esc_html( sw_t( 'Contact Us' ) ); ?>
                     </a>
-                </div>
-            </div>
-            <div class="col-lg-5 text-center mt-4 mt-lg-0">
-                <div class="hero-icon-grid">
-                    <div class="hero-icon-item"><i class="bi bi-circle" style="font-size:3rem;"></i><span class="d-block small mt-1"><?php esc_html_e( 'Table Tennis', 'sportswholesale' ); ?></span></div>
-                    <div class="hero-icon-item"><i class="bi bi-egg" style="font-size:3rem;"></i><span class="d-block small mt-1"><?php esc_html_e( 'Badminton', 'sportswholesale' ); ?></span></div>
-                    <div class="hero-icon-item"><i class="bi bi-record-circle" style="font-size:3rem;"></i><span class="d-block small mt-1"><?php esc_html_e( 'Tennis', 'sportswholesale' ); ?></span></div>
-                    <div class="hero-icon-item"><i class="bi bi-hexagon" style="font-size:3rem;"></i><span class="d-block small mt-1"><?php esc_html_e( 'Pickleball', 'sportswholesale' ); ?></span></div>
-                    <div class="hero-icon-item"><i class="bi bi-arrow-repeat" style="font-size:3rem;"></i><span class="d-block small mt-1"><?php esc_html_e( 'Jump Rope', 'sportswholesale' ); ?></span></div>
                 </div>
             </div>
         </div>
@@ -67,19 +58,19 @@ $inquiry_status = isset( $_GET['inquiry'] ) ? sanitize_text_field( wp_unslash( $
         <div class="row text-center g-3">
             <div class="col-6 col-md-3">
                 <i class="bi bi-shield-check text-primary me-1"></i>
-                <span class="small"><?php esc_html_e( 'Quality Guaranteed', 'sportswholesale' ); ?></span>
+                <span class="small"><?php echo esc_html( sw_t( 'Quality Guaranteed' ) ); ?></span>
             </div>
             <div class="col-6 col-md-3">
                 <i class="bi bi-truck text-primary me-1"></i>
-                <span class="small"><?php esc_html_e( 'Fast Shipping', 'sportswholesale' ); ?></span>
+                <span class="small"><?php echo esc_html( sw_t( 'Fast Shipping' ) ); ?></span>
             </div>
             <div class="col-6 col-md-3">
                 <i class="bi bi-box-seam text-primary me-1"></i>
-                <span class="small"><?php esc_html_e( 'OEM / ODM Service', 'sportswholesale' ); ?></span>
+                <span class="small"><?php echo esc_html( sw_t( 'OEM / ODM Service' ) ); ?></span>
             </div>
             <div class="col-6 col-md-3">
                 <i class="bi bi-cash-stack text-primary me-1"></i>
-                <span class="small"><?php esc_html_e( 'Factory Direct Price', 'sportswholesale' ); ?></span>
+                <span class="small"><?php echo esc_html( sw_t( 'Factory Direct Price' ) ); ?></span>
             </div>
         </div>
     </div>
@@ -88,8 +79,8 @@ $inquiry_status = isset( $_GET['inquiry'] ) ? sanitize_text_field( wp_unslash( $
 <!-- Categories Section -->
 <section class="py-5">
     <div class="container">
-        <h2 class="text-center mb-2"><?php esc_html_e( 'Product Categories', 'sportswholesale' ); ?></h2>
-        <p class="text-center text-muted mb-4"><?php esc_html_e( 'Browse our wide range of sports equipment by category', 'sportswholesale' ); ?></p>
+        <h2 class="text-center mb-2"><?php echo esc_html( sw_t( 'Product Categories' ) ); ?></h2>
+        <p class="text-center text-muted mb-4"><?php echo esc_html( sw_t( 'Browse our wide range of sports equipment by category' ) ); ?></p>
 
         <?php
         $categories = get_terms( [
@@ -103,15 +94,51 @@ $inquiry_status = isset( $_GET['inquiry'] ) ? sanitize_text_field( wp_unslash( $
                 <?php foreach ( $categories as $cat ) :
                     $color = sportswholesale_get_category_color( $cat->slug );
                     $icon  = sportswholesale_get_category_icon( $cat->slug );
+
+                    // Category images mapping
+                    $category_images = [
+                        'table-tennis'       => 'table-tennis.jpg',
+                        'table-tennis-racket'=> 'table-tennis-racket.jpg',
+                        'badminton'          => 'badminton.jpg',
+                        'badminton-racket'   => 'badminton-racket.jpg',
+                        'tennis'             => 'tennis.jpg',
+                        'jump-rope'          => 'jump-rope.jpg',
+                        'grip-strengthener'  => 'grip-strengthener.jpg',
+                    ];
+
+                    $has_local_image = isset( $category_images[ $cat->slug ] );
+                    $local_image_url = $has_local_image ? get_template_directory_uri() . '/assets/images/categories/' . $category_images[ $cat->slug ] : '';
+
+                    // Count products in this category
+                    $lang_product_count = count( get_posts( [
+                        'post_type'      => 'product',
+                        'posts_per_page' => -1,
+                        'fields'         => 'ids',
+                        'tax_query'      => [
+                            [
+                                'taxonomy' => 'product_category',
+                                'field'    => 'term_id',
+                                'terms'    => $cat->term_id,
+                            ],
+                        ],
+                    ] ) );
                 ?>
                     <div class="col-6 col-md-4 col-lg">
                         <a href="<?php echo esc_url( get_term_link( $cat ) ); ?>" class="text-decoration-none">
-                            <div class="card category-card h-100 border-0 shadow-sm text-center p-4 transition-hover">
-                                <div class="category-icon mb-3 mx-auto rounded-circle d-flex align-items-center justify-content-center" style="width:70px;height:70px;background-color:<?php echo esc_attr( $color ); ?>20;color:<?php echo esc_attr( $color ); ?>;">
-                                    <i class="bi <?php echo esc_attr( $icon ); ?>" style="font-size:2rem;"></i>
+                            <div class="card category-card h-100 border-0 shadow-sm overflow-hidden transition-hover">
+                                <?php if ( $has_local_image ) : ?>
+                                    <div class="category-card-img" style="height:140px;overflow:hidden;">
+                                        <img src="<?php echo esc_url( $local_image_url ); ?>" class="card-img-top" alt="<?php echo esc_attr( sw_translate_category( $cat->name ) ); ?>" style="width:100%;height:100%;object-fit:cover;">
+                                    </div>
+                                <?php else : ?>
+                                    <div class="d-flex align-items-center justify-content-center" style="height:140px;background-color:<?php echo esc_attr( $color ); ?>15;">
+                                        <i class="bi <?php echo esc_attr( $icon ); ?>" style="font-size:3rem;color:<?php echo esc_attr( $color ); ?>;"></i>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="card-body text-center py-3">
+                                    <h3 class="h6 mb-1 text-dark"><?php echo esc_html( sw_translate_category( $cat->name ) ); ?></h3>
+                                    <span class="small text-muted"><?php echo esc_html( $lang_product_count ); ?> <?php echo esc_html( sw_t( 'products' ) ); ?></span>
                                 </div>
-                                <h3 class="h6 mb-1 text-dark"><?php echo esc_html( $cat->name ); ?></h3>
-                                <span class="small text-muted"><?php echo esc_html( $cat->count ); ?> <?php esc_html_e( 'products', 'sportswholesale' ); ?></span>
                             </div>
                         </a>
                     </div>
@@ -124,34 +151,78 @@ $inquiry_status = isset( $_GET['inquiry'] ) ? sanitize_text_field( wp_unslash( $
 <!-- Featured Products Section -->
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-2"><?php esc_html_e( 'Featured Products', 'sportswholesale' ); ?></h2>
-        <p class="text-center text-muted mb-4"><?php esc_html_e( 'Our most popular wholesale items', 'sportswholesale' ); ?></p>
+        <h2 class="text-center mb-2"><?php echo esc_html( sw_t( 'Featured Products' ) ); ?></h2>
+        <p class="text-center text-muted mb-4"><?php echo esc_html( sw_t( 'Our most popular wholesale items' ) ); ?></p>
 
         <?php
-        $featured = new WP_Query( [
-            'post_type'      => 'product',
-            'posts_per_page' => 8,
-            'meta_key'       => '_product_featured',
-            'meta_value'     => '1',
-            'orderby'        => 'date',
-            'order'          => 'DESC',
+        // Get products from each category (one per category)
+        $categories = get_terms( [
+            'taxonomy'   => 'product_category',
+            'hide_empty' => true,
+            'orderby'    => 'name',
         ] );
 
-        if ( $featured->have_posts() ) : ?>
+        $featured_products = [];
+        if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) {
+            foreach ( $categories as $cat ) {
+                $product = get_posts( [
+                    'post_type'      => 'product',
+                    'posts_per_page' => 1,
+                    'tax_query'      => [
+                        [
+                            'taxonomy' => 'product_category',
+                            'field'    => 'term_id',
+                            'terms'    => $cat->term_id,
+                        ],
+                    ],
+                    'meta_query'     => [
+                        [
+                            'key'     => '_thumbnail_id',
+                            'compare' => 'EXISTS',
+                        ],
+                    ],
+                    'orderby'        => 'rand',
+                ] );
+                if ( ! empty( $product ) ) {
+                    $featured_products[] = $product[0];
+                }
+            }
+        }
+
+        // If we have less than 8, add more products with images
+        if ( count( $featured_products ) < 8 ) {
+            $existing_ids = wp_list_pluck( $featured_products, 'ID' );
+            $more_products = get_posts( [
+                'post_type'      => 'product',
+                'posts_per_page' => 8 - count( $featured_products ),
+                'post__not_in'   => $existing_ids,
+                'meta_query'     => [
+                    [
+                        'key'     => '_thumbnail_id',
+                        'compare' => 'EXISTS',
+                    ],
+                ],
+                'orderby'        => 'rand',
+            ] );
+            $featured_products = array_merge( $featured_products, $more_products );
+        }
+
+        if ( ! empty( $featured_products ) ) : ?>
             <div class="row g-4">
-                <?php while ( $featured->have_posts() ) : $featured->the_post(); ?>
+                <?php foreach ( $featured_products as $post ) : ?>
+                    <?php setup_postdata( $post ); ?>
                     <div class="col-md-6 col-lg-3">
                         <?php get_template_part( 'template-parts/content', 'product-card' ); ?>
                     </div>
-                <?php endwhile; wp_reset_postdata(); ?>
+                <?php endforeach; wp_reset_postdata(); ?>
             </div>
             <div class="text-center mt-4">
                 <a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>" class="btn btn-primary btn-lg">
-                    <?php esc_html_e( 'View All Products', 'sportswholesale' ); ?> <i class="bi bi-arrow-right ms-2"></i>
+                    <?php echo esc_html( sw_t( 'View All Products' ) ); ?> <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>
         <?php else : ?>
-            <p class="text-center text-muted"><?php esc_html_e( 'No featured products yet.', 'sportswholesale' ); ?></p>
+            <p class="text-center text-muted"><?php echo esc_html( sw_t( 'No featured products yet.' ) ); ?></p>
         <?php endif; ?>
     </div>
 </section>
@@ -159,10 +230,10 @@ $inquiry_status = isset( $_GET['inquiry'] ) ? sanitize_text_field( wp_unslash( $
 <!-- CTA Section -->
 <section class="py-5 cta-section text-white text-center">
     <div class="container">
-        <h2 class="mb-3"><?php esc_html_e( 'Ready to Place a Wholesale Order?', 'sportswholesale' ); ?></h2>
-        <p class="lead mb-4 opacity-90"><?php esc_html_e( 'Contact us today for competitive pricing and custom branding options.', 'sportswholesale' ); ?></p>
+        <h2 class="mb-3"><?php echo esc_html( sw_t( 'Ready to Place a Wholesale Order?' ) ); ?></h2>
+        <p class="lead mb-4 opacity-90"><?php echo esc_html( sw_t( 'Contact us today for competitive pricing and custom branding options.' ) ); ?></p>
         <button type="button" class="btn btn-light btn-lg px-5 sw-inquiry-btn" data-product="">
-            <i class="bi bi-envelope me-2"></i><?php esc_html_e( 'Get a Quote', 'sportswholesale' ); ?>
+            <i class="bi bi-envelope me-2"></i><?php echo esc_html( sw_t( 'Get a Quote' ) ); ?>
         </button>
     </div>
 </section>

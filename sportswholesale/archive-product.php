@@ -105,13 +105,13 @@ if ( 'success' === $inquiry_status ) : ?>
     <!-- Page Header -->
     <div class="mb-4">
         <?php if ( $is_tax ) : ?>
-            <h1 class="h3 mb-2"><?php echo esc_html( $cat_name ); ?></h1>
+            <h1 class="h3 mb-2"><?php echo esc_html( sw_translate_category( $cat_name ) ); ?></h1>
             <?php if ( $cat_desc ) : ?>
                 <p class="text-muted"><?php echo esc_html( $cat_desc ); ?></p>
             <?php endif; ?>
         <?php else : ?>
-            <h1 class="h3 mb-2"><?php esc_html_e( 'All Products', 'sportswholesale' ); ?></h1>
-            <p class="text-muted"><?php esc_html_e( 'Browse our complete catalog of wholesale sports equipment', 'sportswholesale' ); ?></p>
+            <h1 class="h3 mb-2"><?php echo esc_html( sw_t( 'All Products' ) ); ?></h1>
+            <p class="text-muted"><?php echo esc_html( sw_t( 'Browse our complete catalog of wholesale sports equipment' ) ); ?></p>
         <?php endif; ?>
     </div>
 
@@ -123,10 +123,10 @@ if ( 'success' === $inquiry_status ) : ?>
                     <input type="hidden" name="product_category" value="<?php echo esc_attr( $current_cat->slug ); ?>">
                 <?php endif; ?>
                 <select name="orderby" class="form-select form-select-sm" onchange="this.form.submit()">
-                    <option value="date" <?php selected( $orderby, 'date' ); ?>><?php esc_html_e( 'Sort: Newest', 'sportswholesale' ); ?></option>
-                    <option value="price_low" <?php selected( $orderby, 'price_low' ); ?>><?php esc_html_e( 'Sort: Price Low to High', 'sportswholesale' ); ?></option>
-                    <option value="price_high" <?php selected( $orderby, 'price_high' ); ?>><?php esc_html_e( 'Sort: Price High to Low', 'sportswholesale' ); ?></option>
-                    <option value="title" <?php selected( $orderby, 'title' ); ?>><?php esc_html_e( 'Sort: Name A-Z', 'sportswholesale' ); ?></option>
+                    <option value="date" <?php selected( $orderby, 'date' ); ?>><?php echo esc_html( sw_t( 'Sort: Newest' ) ); ?></option>
+                    <option value="price_low" <?php selected( $orderby, 'price_low' ); ?>><?php echo esc_html( sw_t( 'Sort: Price Low to High' ) ); ?></option>
+                    <option value="price_high" <?php selected( $orderby, 'price_high' ); ?>><?php echo esc_html( sw_t( 'Sort: Price High to Low' ) ); ?></option>
+                    <option value="title" <?php selected( $orderby, 'title' ); ?>><?php echo esc_html( sw_t( 'Sort: Name A-Z' ) ); ?></option>
                 </select>
             </form>
         </div>
@@ -137,16 +137,16 @@ if ( 'success' === $inquiry_status ) : ?>
                         <input type="hidden" name="product_category" value="<?php echo esc_attr( $current_cat->slug ); ?>">
                     <?php endif; ?>
                     <select name="material" class="form-select form-select-sm" onchange="this.form.submit()">
-                        <option value=""><?php esc_html_e( 'Filter by Material', 'sportswholesale' ); ?></option>
+                        <option value=""><?php echo esc_html( sw_t( 'Filter by Material' ) ); ?></option>
                         <?php foreach ( $materials as $m ) : ?>
-                            <option value="<?php echo esc_attr( $m ); ?>" <?php selected( isset( $_GET['material'] ) ? sanitize_text_field( wp_unslash( $_GET['material'] ) ) : '', $m ); ?>><?php echo esc_html( $m ); ?></option>
+                            <option value="<?php echo esc_attr( $m ); ?>" <?php selected( isset( $_GET['material'] ) ? sanitize_text_field( wp_unslash( $_GET['material'] ) ) : '', $m ); ?>><?php echo esc_html( sw_translate_meta( $m ) ); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </form>
             <?php endif; ?>
         </div>
         <div class="col-md-4 text-end">
-            <span class="text-muted small"><?php echo esc_html( $query->found_posts ); ?> <?php esc_html_e( 'products found', 'sportswholesale' ); ?></span>
+            <span class="text-muted small"><?php echo esc_html( $query->found_posts ); ?> <?php echo esc_html( sw_t( 'products found' ) ); ?></span>
         </div>
     </div>
 
@@ -161,21 +161,23 @@ if ( 'success' === $inquiry_status ) : ?>
         </div>
 
         <!-- Pagination -->
-        <div class="mt-4">
+        <div class="mt-4 text-center">
             <?php
+            echo '<div class="page-links">';
             echo paginate_links( [
                 'total'     => $query->max_num_pages,
                 'current'   => $paged,
                 'prev_text' => '&laquo;',
                 'next_text' => '&raquo;',
             ] );
+            echo '</div>';
             ?>
         </div>
     <?php else : ?>
         <div class="text-center py-5">
             <i class="bi bi-inbox text-muted" style="font-size:3rem;"></i>
-            <p class="mt-3 text-muted"><?php esc_html_e( 'No products found matching your criteria.', 'sportswholesale' ); ?></p>
-            <a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>" class="btn btn-outline-primary"><?php esc_html_e( 'Clear Filters', 'sportswholesale' ); ?></a>
+            <p class="mt-3 text-muted"><?php echo esc_html( sw_t( 'No products found matching your criteria.' ) ); ?></p>
+            <a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>" class="btn btn-outline-primary"><?php echo esc_html( sw_t( 'Clear Filters' ) ); ?></a>
         </div>
     <?php endif; ?>
 </div>

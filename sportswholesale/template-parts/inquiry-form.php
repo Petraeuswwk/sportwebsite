@@ -10,6 +10,63 @@ defined( 'ABSPATH' ) || exit;
 $countries = sportswholesale_get_countries();
 ?>
 
+<!-- Inquiry Cart Floating Button -->
+<div id="sw-inquiry-cart-btn" class="position-fixed bottom-0 start-0 p-3 d-none" style="z-index:1070">
+    <button type="button" class="btn btn-primary btn-lg rounded-circle shadow position-relative" 
+            id="sw-open-cart" title="<?php esc_attr_e( 'View Inquiry Cart', 'sportswholesale' ); ?>">
+        <i class="bi bi-cart3"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="sw-cart-count">0</span>
+    </button>
+</div>
+
+<!-- Inquiry Cart Modal -->
+<div class="modal fade" id="inquiryCartModal" tabindex="-1" aria-labelledby="inquiryCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="inquiryCartModalLabel">
+                    <i class="bi bi-cart3 me-2"></i><?php esc_html_e( 'Inquiry Cart', 'sportswholesale' ); ?>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Close', 'sportswholesale' ); ?>"></button>
+            </div>
+            <div class="modal-body">
+                <div id="sw-cart-empty" class="text-center py-4">
+                    <i class="bi bi-cart-x text-muted" style="font-size:3rem;"></i>
+                    <p class="mt-3 text-muted"><?php esc_html_e( 'Your inquiry cart is empty', 'sportswholesale' ); ?></p>
+                    <p class="text-muted small"><?php esc_html_e( 'Click the cart icon on products to add them', 'sportswholesale' ); ?></p>
+                </div>
+                <div id="sw-cart-items" class="d-none">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th><?php esc_html_e( 'Product', 'sportswholesale' ); ?></th>
+                                    <th><?php esc_html_e( 'Category', 'sportswholesale' ); ?></th>
+                                    <th class="text-center"><?php esc_html_e( 'Qty', 'sportswholesale' ); ?></th>
+                                    <th class="text-end"><?php esc_html_e( 'Action', 'sportswholesale' ); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody id="sw-cart-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-end mt-3">
+                        <button type="button" class="btn btn-outline-danger btn-sm" id="sw-clear-cart">
+                            <i class="bi bi-trash me-1"></i><?php esc_html_e( 'Clear All', 'sportswholesale' ); ?>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php esc_html_e( 'Continue Browsing', 'sportswholesale' ); ?></button>
+                <button type="button" class="btn btn-primary" id="sw-submit-cart-inquiry" disabled>
+                    <i class="bi bi-send me-1"></i><?php esc_html_e( 'Submit Inquiry', 'sportswholesale' ); ?>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Inquiry Modal -->
 <div class="modal fade" id="inquiryModal" tabindex="-1" aria-labelledby="inquiryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -46,8 +103,11 @@ $countries = sportswholesale_get_countries();
                             </select>
                         </div>
                         <div class="col-12">
-                            <label for="sw_product" class="form-label"><?php esc_html_e( 'Interested Product', 'sportswholesale' ); ?></label>
-                            <input type="text" class="form-control" id="sw_product" name="sw_product">
+                            <label for="sw_product" class="form-label"><?php esc_html_e( 'Interested Products', 'sportswholesale' ); ?></label>
+                            <input type="hidden" name="sw_products" id="sw_products" value="">
+                            <div id="sw-selected-products" class="mb-2"></div>
+                            <input type="text" class="form-control" id="sw_product" name="sw_product" 
+                                   placeholder="<?php esc_attr_e( 'Enter product name or select from cart', 'sportswholesale' ); ?>">
                         </div>
                         <div class="col-12">
                             <label for="sw_message" class="form-label"><?php esc_html_e( 'Message', 'sportswholesale' ); ?></label>

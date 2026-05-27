@@ -73,6 +73,22 @@ a:hover {
     padding-block: 0.75rem;
 }
 
+/* Custom Logo */
+.custom-logo-link img.custom-logo {
+    max-height: 50px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Brand Name */
+.brand-name {
+    color: #dc3545;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+}
+
 /* ============================================================
    Language Switcher
    ============================================================ */
@@ -154,30 +170,6 @@ a:hover {
     z-index: 1;
 }
 
-.hero-icon-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    padding: 2rem;
-    background: rgba(255,255,255,0.05);
-    border-radius: var(--sw-radius-lg);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.hero-icon-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.85);
-    transition: var(--sw-transition);
-}
-
-.hero-icon-item:hover {
-    color: #fff;
-    transform: translateY(-4px);
-}
-
 /* ============================================================
    CTA Section
    ============================================================ */
@@ -194,6 +186,7 @@ a:hover {
 .category-card {
     transition: var(--sw-transition);
     border-radius: var(--sw-radius-lg);
+    overflow: hidden;
 }
 
 .category-card:hover {
@@ -207,6 +200,14 @@ a:hover {
 
 .category-card:hover .category-icon {
     transform: scale(1.1);
+}
+
+.category-card-img img {
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-card-img img {
+    transform: scale(1.05);
 }
 
 /* ============================================================
@@ -244,6 +245,65 @@ a:hover {
 .product-card .btn {
     position: relative;
     z-index: 2;
+}
+
+/* Inquiry Cart Button in Product Card */
+.product-card .sw-add-to-inquiry {
+    min-width: 38px;
+    padding: 0.25rem 0.5rem;
+    transition: var(--sw-transition);
+}
+
+.product-card .sw-add-to-inquiry:hover {
+    transform: scale(1.1);
+}
+
+.product-card .sw-add-to-inquiry.btn-success {
+    pointer-events: none;
+}
+
+/* Floating Inquiry Cart Button */
+#sw-inquiry-cart-btn .btn-lg {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: var(--sw-transition);
+}
+
+#sw-inquiry-cart-btn .btn-lg:hover {
+    transform: scale(1.1);
+}
+
+#sw-inquiry-cart-btn .badge {
+    font-size: 0.75rem;
+    transform: translate(50%, -50%) !important;
+}
+
+/* Inquiry Cart Modal */
+#inquiryCartModal .table th {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+#inquiryCartModal .table td {
+    vertical-align: middle;
+}
+
+#sw-selected-products .badge {
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+}
+
+#sw-selected-products .btn-close {
+    opacity: 0.8;
+    font-size: 0.6em;
+}
+
+#sw-selected-products .btn-close:hover {
+    opacity: 1;
 }
 
 /* ============================================================
@@ -326,8 +386,45 @@ a:hover {
 /* ============================================================
    Pagination
    ============================================================ */
-.pagination {
+.pagination,
+.page-links {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+}
+
+.pagination .page-numbers,
+.page-links .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--sw-radius);
+    text-decoration: none;
+    color: var(--sw-primary);
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-numbers:hover,
+.page-links .page-numbers:hover {
+    background-color: var(--sw-primary);
+    color: #fff;
+    border-color: var(--sw-primary);
+}
+
+.pagination .page-numbers.current,
+.page-links .page-numbers.current {
+    background-color: var(--sw-primary);
+    color: #fff;
+    border-color: var(--sw-primary);
+    font-weight: 600;
 }
 
 .page-link {
@@ -352,6 +449,52 @@ a:hover {
 
 .card-img-top {
     border-radius: var(--sw-radius) var(--sw-radius) 0 0;
+}
+
+/* Product card image - consistent sizing */
+.product-card .card-img-top,
+.product-card .product-card-placeholder,
+article.card img.card-img-top,
+article.card img.wp-post-image,
+.wp-block-post img,
+.wp-block-post-featured-image img {
+    height: 250px !important;
+    object-fit: cover !important;
+    width: 100% !important;
+    background-color: #f8f9fa;
+    display: block;
+}
+
+/* Block post cards */
+article.card,
+.wp-block-post {
+    overflow: hidden;
+    border-radius: var(--sw-radius);
+    transition: var(--sw-transition);
+}
+
+article.card:hover,
+.wp-block-post:hover {
+    box-shadow: var(--sw-shadow-lg) !important;
+    transform: translateY(-4px);
+}
+
+article.card a,
+.wp-block-post a {
+    display: block;
+    overflow: hidden;
+}
+
+/* Block post featured image */
+.wp-block-post-featured-image {
+    margin: 0;
+    overflow: hidden;
+}
+
+.wp-block-post-featured-image img {
+    height: 250px !important;
+    object-fit: cover !important;
+    width: 100% !important;
 }
 
 /* ============================================================
@@ -404,6 +547,10 @@ a:hover {
 
     .site-footer .d-flex {
         justify-content: center;
+    }
+
+    .brand-name {
+        font-size: 1rem;
     }
 }
 
