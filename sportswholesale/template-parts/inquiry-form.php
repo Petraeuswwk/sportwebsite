@@ -10,15 +10,6 @@ defined( 'ABSPATH' ) || exit;
 $countries = sportswholesale_get_countries();
 ?>
 
-<!-- Inquiry Cart Floating Button -->
-<div id="sw-inquiry-cart-btn" class="position-fixed bottom-0 start-0 p-3 d-none" style="z-index:1070">
-    <button type="button" class="btn btn-primary btn-lg rounded-circle shadow position-relative" 
-            id="sw-open-cart" title="<?php esc_attr_e( 'View Inquiry Cart', 'sportswholesale' ); ?>">
-        <i class="bi bi-cart3"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="sw-cart-count">0</span>
-    </button>
-</div>
-
 <!-- Inquiry Cart Modal -->
 <div class="modal fade" id="inquiryCartModal" tabindex="-1" aria-labelledby="inquiryCartModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -83,16 +74,17 @@ $countries = sportswholesale_get_countries();
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="sw_name" class="form-label"><?php esc_html_e( 'Full Name', 'sportswholesale' ); ?> <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="sw_name" name="sw_name" required>
+                            <label for="sw_name" class="form-label"><?php esc_html_e( 'Full Name', 'sportswholesale' ); ?></label>
+                            <input type="text" class="form-control" id="sw_name" name="sw_name">
                         </div>
                         <div class="col-md-6">
-                            <label for="sw_email" class="form-label"><?php esc_html_e( 'Email Address', 'sportswholesale' ); ?> <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="sw_email" name="sw_email" required>
+                            <label for="sw_email" class="form-label"><?php esc_html_e( 'Email Address', 'sportswholesale' ); ?></label>
+                            <input type="email" class="form-control" id="sw_email" name="sw_email">
                         </div>
                         <div class="col-md-6">
                             <label for="sw_phone" class="form-label"><?php esc_html_e( 'Phone / WhatsApp', 'sportswholesale' ); ?></label>
                             <input type="text" class="form-control" id="sw_phone" name="sw_phone">
+                            <div class="form-text"><?php echo esc_html( sw_t( 'Provide email or WhatsApp so we can reply.' ) ); ?></div>
                         </div>
                         <div class="col-md-6">
                             <label for="sw_country" class="form-label"><?php esc_html_e( 'Country', 'sportswholesale' ); ?></label>
@@ -109,6 +101,7 @@ $countries = sportswholesale_get_countries();
                             <input type="text" class="form-control" id="sw_product" name="sw_product" 
                                    placeholder="<?php esc_attr_e( 'Enter product name or select from cart', 'sportswholesale' ); ?>">
                         </div>
+                        <div class="col-md-6"><label for="sw_quantity" class="form-label"><?php echo esc_html( sw_t( 'Quantity' ) ); ?></label><input type="number" min="1" step="1" class="form-control" id="sw_quantity" name="sw_quantity"></div>
                         <div class="col-12">
                             <label for="sw_message" class="form-label"><?php esc_html_e( 'Message', 'sportswholesale' ); ?></label>
                             <textarea class="form-control" id="sw_message" name="sw_message" rows="4" placeholder="<?php esc_attr_e( 'Tell us about your requirements, quantity, customization needs, etc.', 'sportswholesale' ); ?>"></textarea>

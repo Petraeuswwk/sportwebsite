@@ -459,7 +459,7 @@ article.card img.wp-post-image,
 .wp-block-post img,
 .wp-block-post-featured-image img {
     height: 250px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
     width: 100% !important;
     background-color: #f8f9fa;
     display: block;
@@ -493,7 +493,7 @@ article.card a,
 
 .wp-block-post-featured-image img {
     height: 250px !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
     width: 100% !important;
 }
 

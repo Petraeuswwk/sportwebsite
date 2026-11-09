@@ -194,6 +194,7 @@ add_action( 'wp_enqueue_scripts', function () {
         [ 'bootstrap' ],
         wp_get_theme()->get( 'Version' )
     );
+    wp_enqueue_style( 'sportswholesale-v5', get_template_directory_uri() . '/assets/css/v5.css', [ 'sportswholesale-main' ], filemtime( get_template_directory() . '/assets/css/v5.css' ) );
 
     // Bootstrap JS
     wp_enqueue_script(
@@ -209,7 +210,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'sportswholesale-main',
         get_template_directory_uri() . '/assets/js/main.js',
         [ 'bootstrap-bundle' ],
-        wp_get_theme()->get( 'Version' ),
+        filemtime( get_template_directory() . '/assets/js/main.js' ),
         true
     );
 
@@ -222,6 +223,15 @@ add_action( 'wp_enqueue_scripts', function () {
             'required'   => __( 'Please fill in all required fields.', 'sportswholesale' ),
         ],
     ] );
+} );
+
+add_action( 'customize_register', function ( $customize ) {
+    $customize->add_section( 'sw_contact_info', [ 'title' => 'Contact Info', 'priority' => 30 ] );
+    foreach ( [ 'email' => [ 'Email', 'sanitize_email', 'magicallsports@163.com' ], 'phone' => [ 'Phone', 'sanitize_text_field', '' ], 'whatsapp' => [ 'WhatsApp', 'sanitize_text_field', '' ] ] as $key => $field ) {
+        $id = 'sw_contact_' . $key;
+        $customize->add_setting( $id, [ 'default' => $field[2], 'sanitize_callback' => $field[1] ] );
+        $customize->add_control( $id, [ 'label' => $field[0], 'section' => 'sw_contact_info', 'type' => 'text' ] );
+    }
 } );
 
 /**

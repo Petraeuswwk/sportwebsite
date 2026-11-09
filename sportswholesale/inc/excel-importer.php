@@ -178,7 +178,8 @@ function sw_run_product_import() {
     }
 
     foreach ( $data as $product ) {
-        $title = sanitize_text_field( $product['title'] );
+        $title = sanitize_text_field( $product['title_en'] ?? $product['title'] ?? '' );
+        if ( ! $title ) { $errors++; continue; }
 
         // Check for existing product
         if ( $skip_duplicates ) {
@@ -191,6 +192,8 @@ function sw_run_product_import() {
             ] );
 
             if ( ! empty( $existing ) ) {
+                // Enriched imports update their existing product instead of creating a duplicate.
+                sw_import_enriched_product( $existing[0], $product, $images_dir, $import_images );
                 $skipped++;
                 continue;
             }
@@ -220,9 +223,12 @@ function sw_run_product_import() {
         if ( ! empty( $product['material'] ) ) {
             update_post_meta( $post_id, '_product_material', sanitize_text_field( $product['material'] ) );
         }
+        foreach ( [ 'quantity_per_box' => '_product_quantity_per_box', 'box_spec' => '_product_box_spec' ] as $field => $meta_key ) {
+            if ( ! empty( $product[ $field ] ) ) { update_post_meta( $post_id, $meta_key, sanitize_text_field( $product[ $field ] ) ); }
+        }
 
         // Set product language (default to Chinese for Excel import)
-        $import_lang = ! empty( $_POST['sw_import_lang'] ) ? sanitize_text_field( wp_unslash( $_POST['sw_import_lang'] ) ) : 'zh_CN';
+        $import_lang = ! empty( $product['title_en'] ) ? 'en_US' : ( ! empty( $_POST['sw_import_lang'] ) ? sanitize_text_field( wp_unslash( $_POST['sw_import_lang'] ) ) : 'zh_CN' );
         update_post_meta( $post_id, '_product_language', $import_lang );
 
         // Build subtitle from available info
@@ -280,6 +286,7 @@ function sw_run_product_import() {
                 }
             }
         }
+        sw_import_enriched_product( $post_id, $product, $images_dir, $import_images );
 
         $created++;
     }
@@ -295,6 +302,52 @@ function sw_run_product_import() {
     return [ 'success' => true, 'message' => $message ];
 }
 
+/** Import optional rich product data. Picture values must be local filenames. */
+function sw_import_enriched_product( $post_id, $product, $images_dir, $import_images ) {
+    foreach ( [ 'material' => '_product_material', 'quantity_per_box' => '_product_quantity_per_box', 'box_spec' => '_product_box_spec' ] as $field => $meta ) {
+        if ( ! empty( $product[ $field ] ) ) { update_post_meta( $post_id, $meta, sanitize_text_field( $product[ $field ] ) ); }
+    }
+    foreach ( [ 'title_en' => '_product_title_en', 'moq_unit' => '_product_moq_unit' ] as $field => $meta ) {
+        if ( isset( $product[ $field ] ) ) { update_post_meta( $post_id, $meta, sanitize_text_field( $product[ $field ] ) ); }
+    }
+    if ( isset( $product['lead_time_days'] ) ) { update_post_meta( $post_id, '_product_lead_time_days', absint( $product['lead_time_days'] ) ); }
+    if ( isset( $product['price_tiers'] ) && is_array( $product['price_tiers'] ) ) {
+        $tiers = [];
+        foreach ( $product['price_tiers'] as $tier ) {
+            if ( ! isset( $tier['min_qty'], $tier['price'] ) ) { continue; }
+            $tiers[] = [ 'min_qty' => absint( $tier['min_qty'] ), 'price' => sanitize_text_field( $tier['price'] ) ];
+        }
+        usort( $tiers, function ( $a, $b ) { return $a['min_qty'] - $b['min_qty']; } );
+        update_post_meta( $post_id, '_product_price_tiers', $tiers );
+    }
+    foreach ( [ 'specs' => '_product_specs', 'packing' => '_product_packing', 'source_ids' => '_product_source_ids' ] as $field => $meta ) {
+        if ( ! isset( $product[ $field ] ) || ! is_array( $product[ $field ] ) ) { continue; }
+        $clean = [];
+        foreach ( $product[ $field ] as $key => $value ) { if ( is_scalar( $value ) ) { $clean[ sanitize_text_field( $key ) ] = sanitize_text_field( $value ); } }
+        update_post_meta( $post_id, $meta, $clean );
+    }
+    if ( ! $import_images ) { return; }
+    $image_cache = [];
+    $local_image = function ( $file ) use ( $images_dir, $post_id, &$image_cache ) {
+        if ( ! is_string( $file ) || ! $file || basename( $file ) !== $file ) { return 0; }
+        if ( isset( $image_cache[ $file ] ) ) { return $image_cache[ $file ]; }
+        $path = $images_dir . '/' . $file;
+        $image_cache[ $file ] = is_file( $path ) ? sw_sideload_image( $path, $post_id, $file ) : 0;
+        return is_wp_error( $image_cache[ $file ] ) ? 0 : (int) $image_cache[ $file ];
+    };
+    foreach ( [ 'gallery' => '_product_gallery', 'detail_images' => '_product_detail_images' ] as $field => $meta ) {
+        if ( empty( $product[ $field ] ) || ! is_array( $product[ $field ] ) ) { continue; }
+        $ids = array_filter( array_map( $local_image, $product[ $field ] ) );
+        update_post_meta( $post_id, $meta, array_values( $ids ) );
+        if ( 'gallery' === $field && ! has_post_thumbnail( $post_id ) && $ids ) { set_post_thumbnail( $post_id, reset( $ids ) ); }
+    }
+    if ( ! empty( $product['colors'] ) && is_array( $product['colors'] ) ) {
+        $colors = [];
+        foreach ( $product['colors'] as $color ) { $colors[] = [ 'code' => sanitize_text_field( $color['code'] ?? '' ), 'picture_id' => $local_image( $color['picture'] ?? '' ) ]; }
+        update_post_meta( $post_id, '_product_colors', $colors );
+    }
+}
+
 /**
  * Sideload an image from a local file path.
  */
@@ -305,18 +358,24 @@ function sw_sideload_image( $file_path, $post_id, $title = '' ) {
         require_once ABSPATH . 'wp-admin/includes/image.php';
     }
 
+    $temporary_file = wp_tempnam( basename( $file_path ) );
+    if ( ! $temporary_file || ! copy( $file_path, $temporary_file ) ) {
+        return new WP_Error( 'image_copy_failed', 'Could not copy local image for import.' );
+    }
     $file_array = [
         'name'     => basename( $file_path ),
-        'tmp_name' => $file_path,
+        'tmp_name' => $temporary_file,
     ];
 
     // Check file type
     $wp_filetype = wp_check_filetype( $file_array['name'] );
     if ( ! $wp_filetype['type'] ) {
+        unlink( $temporary_file );
         return new WP_Error( 'invalid_type', 'Invalid file type' );
     }
 
     $attachment_id = media_handle_sideload( $file_array, $post_id, $title );
+    if ( is_wp_error( $attachment_id ) && file_exists( $temporary_file ) ) { unlink( $temporary_file ); }
 
     return $attachment_id;
 }

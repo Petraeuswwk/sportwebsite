@@ -182,7 +182,4 @@ if ( 'success' === $inquiry_status ) : ?>
     <?php endif; ?>
 </div>
 
-<!-- Inquiry Form Modal -->
-<?php get_template_part( 'template-parts/inquiry', 'form' ); ?>
-
 <?php get_footer(); ?>

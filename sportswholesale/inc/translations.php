@@ -606,6 +606,261 @@ function sw_t( $key, $default = '' ) {
                 'ar' => 'مطاط+لوحة 8 مم',
                 'es_ES' => 'Caucho+Tabla 8mm',
             ],
+            // Approved V5 interface strings.
+            'All' => [ 'zh_CN' => '全部', 'ar' => 'الكل', 'es_ES' => 'Todos' ],
+            'Ready to ship in about %d days' => [ 'zh_CN' => '预计约 %d 天可发货', 'ar' => 'جاهز للشحن خلال نحو %d أيام', 'es_ES' => 'Listo para enviar en unos %d días' ],
+            'FACTORY & WAREHOUSE' => [ 'zh_CN' => '工厂与仓库', 'ar' => 'المصنع والمستودع', 'es_ES' => 'FÁBRICA Y ALMACÉN' ],
+            'Warehouse' => [ 'zh_CN' => '仓库', 'ar' => 'المستودع', 'es_ES' => 'Almacén' ],
+            'Stringing & quality check' => [ 'zh_CN' => '穿线与质检', 'ar' => 'الشد وفحص الجودة', 'es_ES' => 'Encordado y control de calidad' ],
+            'Packing line' => [ 'zh_CN' => '包装线', 'ar' => 'خط التعبئة', 'es_ES' => 'Línea de embalaje' ],
+            'Container loading' => [ 'zh_CN' => '装柜', 'ar' => 'تحميل الحاويات', 'es_ES' => 'Carga de contenedores' ],
+            'Southeast Asia' => [ 'zh_CN' => '东南亚', 'ar' => 'جنوب شرق آسيا', 'es_ES' => 'Sudeste Asiático' ],
+            'Middle East' => [ 'zh_CN' => '中东', 'ar' => 'الشرق الأوسط', 'es_ES' => 'Oriente Medio' ],
+            'Central Asia' => [ 'zh_CN' => '中亚', 'ar' => 'آسيا الوسطى', 'es_ES' => 'Asia Central' ],
+            'South America' => [ 'zh_CN' => '南美洲', 'ar' => 'أمريكا الجنوبية', 'es_ES' => 'Sudamérica' ],
+            'About' => [ 'zh_CN' => '关于我们', 'ar' => 'من نحن', 'es_ES' => 'Nosotros' ],
+            'Browse our sports equipment catalog and send a product list for a wholesale quote.' => [ 'zh_CN' => '浏览体育用品目录，发送产品清单获取批发报价。', 'ar' => 'تصفح كتالوج المعدات الرياضية وأرسل قائمة المنتجات للحصول على عرض سعر.', 'es_ES' => 'Explore nuestro catálogo deportivo y envíe una lista de productos para recibir una cotización.' ],
+            'Wholesale inquiries' => [ 'zh_CN' => '批发询盘', 'ar' => 'استفسارات الجملة', 'es_ES' => 'Consultas mayoristas' ],
+            'Wholesale sports equipment from Yiwu, China' => [
+                'zh_CN' => '中国义乌体育用品批发',
+                'ar' => 'معدات رياضية بالجملة من ييوو، الصين',
+                'es_ES' => 'Artículos deportivos al por mayor desde Yiwu, China',
+            ],
+            'Racket Sports Wholesale' => [
+                'zh_CN' => '球拍运动用品批发',
+                'ar' => 'بيع معدات رياضات المضرب بالجملة',
+                'es_ES' => 'Deportes de raqueta al por mayor',
+            ],
+            'for Global Buyers' => [
+                'zh_CN' => '面向全球买家',
+                'ar' => 'للمشترين حول العالم',
+                'es_ES' => 'para compradores globales',
+            ],
+            'Explore badminton, table tennis, tennis and fitness products. Build a mixed inquiry and ask us about carton pricing, packing and OEM options.' => [
+                'zh_CN' => '浏览羽毛球、乒乓球、网球和健身产品。将不同产品加入询盘，了解箱价、包装和OEM选项。',
+                'ar' => 'تصفح منتجات الريشة وتنس الطاولة والتنس واللياقة. أرسل استفسارًا مختلطًا عن الأسعار والتعبئة وخيارات التصنيع.',
+                'es_ES' => 'Explore bádminton, tenis de mesa, tenis y fitness. Envíe una consulta mixta sobre precios por caja, embalaje y opciones OEM.',
+            ],
+            'MOQ shown on every product' => [
+                'zh_CN' => '每款产品标明起订量',
+                'ar' => 'الحد الأدنى للطلب موضح لكل منتج',
+                'es_ES' => 'MOQ indicado en cada producto',
+            ],
+            'Categories' => [
+                'zh_CN' => '分类',
+                'ar' => 'الفئات',
+                'es_ES' => 'Categorías',
+            ],
+            'Languages' => [
+                'zh_CN' => '语言',
+                'ar' => 'اللغات',
+                'es_ES' => 'Idiomas',
+            ],
+            'On request' => [
+                'zh_CN' => '按需提供',
+                'ar' => 'حسب الطلب',
+                'es_ES' => 'A solicitud',
+            ],
+            'Browse by sport and product type' => [
+                'zh_CN' => '按运动及产品类型浏览',
+                'ar' => 'تصفح حسب الرياضة ونوع المنتج',
+                'es_ES' => 'Explore por deporte y tipo de producto',
+            ],
+            'Compare products, pack sizes and MOQ' => [
+                'zh_CN' => '比较产品、箱规和起订量',
+                'ar' => 'قارن المنتجات والتعبئة والحد الأدنى للطلب',
+                'es_ES' => 'Compare productos, embalajes y MOQ',
+            ],
+            'No products in this selection.' => [
+                'zh_CN' => '此分类暂无产品。',
+                'ar' => 'لا توجد منتجات في هذا القسم.',
+                'es_ES' => 'No hay productos en esta selección.',
+            ],
+            'Ask to see packing and dispatch' => [
+                'zh_CN' => '了解包装与发货流程',
+                'ar' => 'اطلب مشاهدة التعبئة والشحن',
+                'es_ES' => 'Conozca el embalaje y el despacho',
+            ],
+            'We work with partner factories. Request a video call to discuss products, packing and shipping.' => [
+                'zh_CN' => '我们与合作工厂协作。可预约视频通话，讨论产品、包装和运输。',
+                'ar' => 'نعمل مع مصانع شريكة. اطلب مكالمة فيديو لمناقشة المنتجات والتعبئة والشحن.',
+                'es_ES' => 'Trabajamos con fábricas asociadas. Solicite una videollamada para hablar sobre productos, embalaje y envío.',
+            ],
+            'Book a factory video call' => [
+                'zh_CN' => '预约视频看厂',
+                'ar' => 'احجز مكالمة فيديو للمصنع',
+                'es_ES' => 'Reserve una videollamada con la fábrica',
+            ],
+            'Reference images. Factory photos to be replaced with verified partner photos before launch.' => [
+                'zh_CN' => '示意图片。上线前将替换为经核实的合作工厂实拍。',
+                'ar' => 'صور توضيحية. ستستبدل بصور حقيقية للمصانع الشريكة قبل الإطلاق.',
+                'es_ES' => 'Imágenes de referencia. Se sustituirán por fotos verificadas de fábricas asociadas antes del lanzamiento.',
+            ],
+            'Choose & inquire' => [
+                'zh_CN' => '选品询盘',
+                'ar' => 'اختر واستفسر',
+                'es_ES' => 'Elija y consulte',
+            ],
+            'Add products and quantities to your inquiry.' => [
+                'zh_CN' => '将产品和数量加入询盘。',
+                'ar' => 'أضف المنتجات والكميات إلى استفسارك.',
+                'es_ES' => 'Añada productos y cantidades a su consulta.',
+            ],
+            'Confirm a quote' => [
+                'zh_CN' => '报价确认',
+                'ar' => 'تأكيد عرض السعر',
+                'es_ES' => 'Confirme la cotización',
+            ],
+            'We confirm pricing, packing and terms with you.' => [
+                'zh_CN' => '与您确认价格、包装及条款。',
+                'ar' => 'نؤكد معك الأسعار والتعبئة والشروط.',
+                'es_ES' => 'Confirmamos precios, embalaje y condiciones.',
+            ],
+            'Sample or produce' => [
+                'zh_CN' => '打样或生产',
+                'ar' => 'عينة أو إنتاج',
+                'es_ES' => 'Muestra o producción',
+            ],
+            'Review samples or confirm production details.' => [
+                'zh_CN' => '查看样品或确认生产细节。',
+                'ar' => 'راجع العينات أو أكد تفاصيل الإنتاج.',
+                'es_ES' => 'Revise muestras o confirme detalles de producción.',
+            ],
+            'Pack & ship' => [
+                'zh_CN' => '装箱发货',
+                'ar' => 'التعبئة والشحن',
+                'es_ES' => 'Embalaje y envío',
+            ],
+            'Confirm packing and shipment arrangements.' => [
+                'zh_CN' => '确认包装与发货安排。',
+                'ar' => 'تأكيد ترتيبات التعبئة والشحن.',
+                'es_ES' => 'Confirme el embalaje y el envío.',
+            ],
+            'What is the minimum order?' => [
+                'zh_CN' => '最低起订量是多少？',
+                'ar' => 'ما الحد الأدنى للطلب؟',
+                'es_ES' => '¿Cuál es el pedido mínimo?',
+            ],
+            'MOQ varies by product. Check the product page and inquire to confirm carton units.' => [
+                'zh_CN' => '起订量因产品而异。请查看产品页并询盘确认箱规单位。',
+                'ar' => 'يختلف الحد الأدنى حسب المنتج. راجع صفحة المنتج وتواصل لتأكيد وحدات الكرتون.',
+                'es_ES' => 'El MOQ varía según el producto. Consulte la página y confirme las unidades por caja.',
+            ],
+            'How do payment and shipping work?' => [
+                'zh_CN' => '付款和运输如何安排？',
+                'ar' => 'كيف يتم الدفع والشحن؟',
+                'es_ES' => '¿Cómo funcionan el pago y el envío?',
+            ],
+            'We confirm payment and EXW or FOB terms in your quotation.' => [
+                'zh_CN' => '我们会在报价时确认付款及EXW或FOB条款。',
+                'ar' => 'نؤكد شروط الدفع وEXW أو FOB في عرض السعر.',
+                'es_ES' => 'Confirmamos el pago y los términos EXW o FOB en la cotización.',
+            ],
+            'How long is the lead time?' => [
+                'zh_CN' => '交期需要多久？',
+                'ar' => 'ما مدة التسليم؟',
+                'es_ES' => '¿Cuál es el plazo de entrega?',
+            ],
+            'Lead time depends on product, stock and customization. Ask for a current estimate.' => [
+                'zh_CN' => '交期取决于产品、库存和定制需求，请询问当前预计时间。',
+                'ar' => 'تعتمد المدة على المنتج والمخزون والتخصيص. اطلب تقديرًا حديثًا.',
+                'es_ES' => 'El plazo depende del producto, inventario y personalización. Solicite una estimación.',
+            ],
+            'Can you print our logo (OEM)?' => [
+                'zh_CN' => '可以印制我们的商标吗？',
+                'ar' => 'هل يمكن طباعة شعارنا؟',
+                'es_ES' => '¿Pueden imprimir nuestro logotipo?',
+            ],
+            'Logo printing is available on request for volume orders. Send your artwork to discuss options.' => [
+                'zh_CN' => '批量订单可询问商标印制，请发送设计稿讨论选项。',
+                'ar' => 'تتوفر طباعة الشعار للطلبات الكبيرة حسب الطلب. أرسل التصميم لمناقشة الخيارات.',
+                'es_ES' => 'La impresión del logo está disponible bajo consulta para pedidos por volumen. Envíe su diseño.',
+            ],
+            'Can I request samples?' => [
+                'zh_CN' => '可以申请样品吗？',
+                'ar' => 'هل يمكن طلب عينات؟',
+                'es_ES' => '¿Puedo solicitar muestras?',
+            ],
+            'Ask us about sample availability and shipping for the products you need.' => [
+                'zh_CN' => '请就所需产品咨询样品供应和运费。',
+                'ar' => 'اسألنا عن توفر العينات وشحن المنتجات المطلوبة.',
+                'es_ES' => 'Consúltenos sobre muestras y envío de los productos que necesita.',
+            ],
+            'Send your product list and quantities for a tailored quote.' => [
+                'zh_CN' => '发送产品清单和数量，获取针对性报价。',
+                'ar' => 'أرسل قائمة المنتجات والكميات للحصول على عرض سعر.',
+                'es_ES' => 'Envíe su lista de productos y cantidades para una cotización.',
+            ],
+            'Quantity pricing' => [
+                'zh_CN' => '阶梯价格',
+                'ar' => 'أسعار حسب الكمية',
+                'es_ES' => 'Precios por cantidad',
+            ],
+            'Colors / styles' => [
+                'zh_CN' => '颜色／款式',
+                'ar' => 'الألوان / الأنماط',
+                'es_ES' => 'Colores / estilos',
+            ],
+            'Quantity' => [
+                'zh_CN' => '数量',
+                'ar' => 'الكمية',
+                'es_ES' => 'Cantidad',
+            ],
+            'EXW / FOB — confirm when you inquire' => [
+                'zh_CN' => 'EXW／FOB——询盘时确认',
+                'ar' => 'EXW / FOB — يتم التأكيد عند الاستفسار',
+                'es_ES' => 'EXW / FOB — confirmar al consultar',
+            ],
+            'Product specifications' => [
+                'zh_CN' => '产品参数',
+                'ar' => 'مواصفات المنتج',
+                'es_ES' => 'Especificaciones del producto',
+            ],
+            'Packing & shipping' => [
+                'zh_CN' => '箱规与运输',
+                'ar' => 'التعبئة والشحن',
+                'es_ES' => 'Embalaje y envío',
+            ],
+            'Your logo on request' => [
+                'zh_CN' => '可按需印制买家商标',
+                'ar' => 'شعارك حسب الطلب',
+                'es_ES' => 'Su logo a solicitud',
+            ],
+            'Ask about logo printing for volume orders.' => [
+                'zh_CN' => '批量订单可咨询商标印制。',
+                'ar' => 'اسأل عن طباعة الشعار للطلبات الكبيرة.',
+                'es_ES' => 'Consulte la impresión del logo para pedidos por volumen.',
+            ],
+            'Ask about OEM' => [
+                'zh_CN' => '咨询OEM',
+                'ar' => 'استفسر عن التصنيع حسب الطلب',
+                'es_ES' => 'Consultar OEM',
+            ],
+            'Details & more views' => [
+                'zh_CN' => '详情与更多图片',
+                'ar' => 'التفاصيل والمزيد من الصور',
+                'es_ES' => 'Detalles y más vistas',
+            ],
+            'Warehouse & packing' => [
+                'zh_CN' => '仓库与包装',
+                'ar' => 'المستودع والتعبئة',
+                'es_ES' => 'Almacén y embalaje',
+            ],
+            'Reference images. Replace with verified partner photos before launch.' => [
+                'zh_CN' => '示意图片。上线前将替换为经核实的合作厂家实拍。',
+                'ar' => 'صور توضيحية. ستستبدل بصور الشركاء الحقيقية قبل الإطلاق.',
+                'es_ES' => 'Imágenes de referencia. Sustituir por fotos verificadas antes del lanzamiento.',
+            ],
+            'Provide email or WhatsApp so we can reply.' => [
+                'zh_CN' => '请留下邮箱或WhatsApp，以便我们回复。',
+                'ar' => 'قدم بريدًا إلكترونيًا أو واتساب للرد عليك.',
+                'es_ES' => 'Proporcione correo o WhatsApp para responderle.',
+            ],
+            'Add to Inquiry Basket' => [
+                'zh_CN' => '加入询盘篮',
+                'ar' => 'أضف إلى سلة الاستفسارات',
+                'es_ES' => 'Añadir a la cesta de consultas',
+            ],
         ];
     }
 

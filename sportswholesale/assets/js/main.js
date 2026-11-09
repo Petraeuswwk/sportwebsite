@@ -1,488 +1,134 @@
-/**
- * Sports Wholesale Theme - Main JavaScript
- *
- * Handles: inquiry modal, gallery switching, form validation,
- * share button, toast notifications, inquiry cart.
- *
- * @package SportsWholesale
- */
-
+/** Shared V5 interactions for the WordPress theme. */
 (function () {
-    'use strict';
-
-    /* ==========================================================
-       Inquiry Cart (localStorage based)
-       ========================================================== */
-    var INQUIRY_CART_KEY = 'sw_inquiry_cart';
-
-    function getCart() {
-        try {
-            var data = localStorage.getItem(INQUIRY_CART_KEY);
-            return data ? JSON.parse(data) : [];
-        } catch (e) {
-            return [];
-        }
-    }
-
-    function saveCart(cart) {
-        try {
-            localStorage.setItem(INQUIRY_CART_KEY, JSON.stringify(cart));
-        } catch (e) {}
-    }
-
-    function addToCart(productId, productName) {
-        var cart = getCart();
-        var exists = cart.some(function (item) { return item.id === productId; });
-        if (exists) return false;
-        
-        cart.push({ id: productId, name: productName });
-        saveCart(cart);
-        updateCartUI();
-        return true;
-    }
-
-    function removeFromCart(productId) {
-        var cart = getCart().filter(function (item) { return item.id !== productId; });
-        saveCart(cart);
-        updateCartUI();
-        renderCartItems();
-    }
-
-    function clearCart() {
-        saveCart([]);
-        updateCartUI();
-        renderCartItems();
-    }
-
-    function updateCartUI() {
-        var cart = getCart();
-        var count = cart.length;
-        
-        // Update floating button
-        var cartBtn = document.getElementById('sw-inquiry-cart-btn');
-        var cartCount = document.getElementById('sw-cart-count');
-        
-        if (cartBtn) {
-            if (count > 0) {
-                cartBtn.classList.remove('d-none');
-            } else {
-                cartBtn.classList.add('d-none');
-            }
-        }
-        
-        if (cartCount) {
-            cartCount.textContent = count;
-        }
-        
-        // Update add-to-cart buttons
-        document.querySelectorAll('.sw-add-to-inquiry').forEach(function (btn) {
-            var productId = btn.getAttribute('data-product-id');
-            var inCart = cart.some(function (item) { return item.id === productId; });
-            
-            if (inCart) {
-                btn.classList.remove('btn-outline-secondary');
-                btn.classList.add('btn-success');
-                btn.querySelector('i').className = 'bi bi-cart-check';
-                btn.disabled = true;
-            } else {
-                btn.classList.remove('btn-success');
-                btn.classList.add('btn-outline-secondary');
-                btn.querySelector('i').className = 'bi bi-cart-plus';
-                btn.disabled = false;
-            }
-        });
-        
-        // Update hidden field for form submission
-        var productsField = document.getElementById('sw_products');
-        if (productsField) {
-            productsField.value = cart.map(function (item) { return item.name; }).join('|');
-        }
-        
-        // Update selected products display
-        var selectedProducts = document.getElementById('sw-selected-products');
-        if (selectedProducts) {
-            if (count > 0) {
-                selectedProducts.innerHTML = cart.map(function (item) {
-                    return '<span class="badge bg-primary me-1 mb-1">' + 
-                           escapeHtml(item.name) + 
-                           ' <button type="button" class="btn-close btn-close-white ms-1" data-remove-id="' + 
-                           item.id + '" style="font-size:0.6em;"></button></span>';
-                }).join('');
-            } else {
-                selectedProducts.innerHTML = '';
-            }
-        }
-        
-        // Update submit button
-        var submitBtn = document.getElementById('sw-submit-cart-inquiry');
-        if (submitBtn) {
-            submitBtn.disabled = count === 0;
-        }
-    }
-
-    function renderCartItems() {
-        var cart = getCart();
-        var emptyEl = document.getElementById('sw-cart-empty');
-        var itemsEl = document.getElementById('sw-cart-items');
-        var tbody = document.getElementById('sw-cart-table-body');
-        
-        if (!emptyEl || !itemsEl || !tbody) return;
-        
-        if (cart.length === 0) {
-            emptyEl.classList.remove('d-none');
-            itemsEl.classList.add('d-none');
-            return;
-        }
-        
-        emptyEl.classList.add('d-none');
-        itemsEl.classList.remove('d-none');
-        
-        tbody.innerHTML = cart.map(function (item, index) {
-            return '<tr>' +
-                '<td>' + escapeHtml(item.name) + '</td>' +
-                '<td>-</td>' +
-                '<td class="text-center"><input type="number" class="form-control form-control-sm mx-auto" style="width:70px" min="1" value="1" data-qty-id="' + item.id + '"></td>' +
-                '<td class="text-end"><button type="button" class="btn btn-outline-danger btn-sm" data-remove-id="' + item.id + '"><i class="bi bi-trash"></i></button></td>' +
-                '</tr>';
-        }).join('');
-    }
-
-    function escapeHtml(text) {
-        var div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    /* ==========================================================
-       Inquiry Modal Handler
-       ========================================================== */
-    function initInquiryButtons() {
-        document.addEventListener('click', function (e) {
-            var btn = e.target.closest('.sw-inquiry-btn');
-            if (!btn) return;
-
-            e.preventDefault();
-            var productName = btn.getAttribute('data-product') || '';
-            var modal = document.getElementById('inquiryModal');
-            if (!modal) return;
-
-            var productInput = modal.querySelector('#sw_product');
-            if (productInput && productName) {
-                productInput.value = productName;
-            }
-
-            var bsModal = bootstrap.Modal.getOrCreateInstance(modal);
-            bsModal.show();
-        });
-    }
-
-    /* ==========================================================
-       Inquiry Cart Buttons Handler
-       ========================================================== */
-    function initInquiryCart() {
-        // Add to cart buttons
-        document.addEventListener('click', function (e) {
-            var btn = e.target.closest('.sw-add-to-inquiry');
-            if (!btn) return;
-
-            e.preventDefault();
-            e.stopPropagation();
-            
-            var productId = btn.getAttribute('data-product-id');
-            var productName = btn.getAttribute('data-product-name');
-            
-            if (addToCart(productId, productName)) {
-                // Show brief feedback
-                var originalHtml = btn.innerHTML;
-                btn.innerHTML = '<i class="bi bi-check"></i>';
-                setTimeout(function () {
-                    btn.innerHTML = originalHtml;
-                }, 1000);
-            }
-        });
-        
-        // Open cart button
-        var openCartBtn = document.getElementById('sw-open-cart');
-        if (openCartBtn) {
-            openCartBtn.addEventListener('click', function () {
-                renderCartItems();
-                var modal = document.getElementById('inquiryCartModal');
-                if (modal) {
-                    var bsModal = bootstrap.Modal.getOrCreateInstance(modal);
-                    bsModal.show();
-                }
-            });
-        }
-        
-        // Clear cart button
-        document.addEventListener('click', function (e) {
-            if (e.target.closest('#sw-clear-cart')) {
-                clearCart();
-            }
-        });
-        
-        // Remove item buttons (in cart modal and form)
-        document.addEventListener('click', function (e) {
-            var removeBtn = e.target.closest('[data-remove-id]');
-            if (removeBtn) {
-                var productId = removeBtn.getAttribute('data-remove-id');
-                removeFromCart(productId);
-            }
-        });
-        
-        // Submit cart inquiry button
-        var submitCartBtn = document.getElementById('sw-submit-cart-inquiry');
-        if (submitCartBtn) {
-            submitCartBtn.addEventListener('click', function () {
-                var cart = getCart();
-                if (cart.length === 0) return;
-                
-                // Close cart modal
-                var cartModal = document.getElementById('inquiryCartModal');
-                if (cartModal) {
-                    var bsCartModal = bootstrap.Modal.getInstance(cartModal);
-                    if (bsCartModal) bsCartModal.hide();
-                }
-                
-                // Open inquiry modal
-                var inquiryModal = document.getElementById('inquiryModal');
-                if (inquiryModal) {
-                    var bsInquiryModal = bootstrap.Modal.getOrCreateInstance(inquiryModal);
-                    bsInquiryModal.show();
-                }
-            });
-        }
-        
-        // Initialize cart UI on load
-        updateCartUI();
-    }
-
-    /* ==========================================================
-       Inquiry Form Validation & Submission
-       ========================================================== */
-    function initInquiryForm() {
-        var form = document.getElementById('sw-inquiry-form');
-        if (!form) return;
-
-        form.addEventListener('submit', function (e) {
-            var name = form.querySelector('[name="sw_name"]');
-            var email = form.querySelector('[name="sw_email"]');
-            var isValid = true;
-
-            // Reset
-            form.querySelectorAll('.is-invalid').forEach(function (el) {
-                el.classList.remove('is-invalid');
-            });
-            form.querySelectorAll('.invalid-feedback').forEach(function (el) {
-                el.remove();
-            });
-
-            if (!name || !name.value.trim()) {
-                markInvalid(name, swData.i18n.required);
-                isValid = false;
-            }
-
-            if (!email || !email.value.trim() || !isValidEmail(email.value)) {
-                markInvalid(email, swData.i18n.required);
-                isValid = false;
-            }
-
-            if (!isValid) {
-                e.preventDefault();
-                return;
-            }
-
-            // Show loading state
-            var submitBtn = form.querySelector('[type="submit"]');
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>' + swData.i18n.submitting;
-            }
-        });
-    }
-
-    function markInvalid(field, message) {
-        if (!field) return;
-        field.classList.add('is-invalid');
-        var feedback = document.createElement('div');
-        feedback.className = 'invalid-feedback';
-        feedback.textContent = message;
-        field.parentNode.appendChild(feedback);
-    }
-
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    /* ==========================================================
-       Product Gallery Thumbnails
-       ========================================================== */
-    function initGallery() {
-        var thumbnails = document.querySelectorAll('.gallery-thumb');
-        var mainImage = document.getElementById('sw-main-image');
-        if (!thumbnails.length || !mainImage) return;
-
-        thumbnails.forEach(function (thumb) {
-            thumb.addEventListener('click', function () {
-                var fullUrl = thumb.getAttribute('data-full');
-                if (!fullUrl) return;
-
-                mainImage.style.opacity = '0';
-                setTimeout(function () {
-                    mainImage.src = fullUrl;
-                    mainImage.style.opacity = '1';
-                }, 150);
-
-                thumbnails.forEach(function (t) {
-                    t.classList.remove('active');
-                });
-                thumb.classList.add('active');
-            });
-        });
-    }
-
-    /* ==========================================================
-       Share Button (Web Share API with fallback)
-       ========================================================== */
-    function initShareButton() {
-        var btn = document.getElementById('sw-share-btn');
-        if (!btn) return;
-
-        btn.addEventListener('click', function () {
-            var shareData = {
-                title: document.title,
-                text: document.title,
-                url: window.location.href,
-            };
-
-            if (navigator.share) {
-                navigator.share(shareData).catch(function () {});
-            } else {
-                // Fallback: copy URL to clipboard
-                navigator.clipboard.writeText(window.location.href).then(function () {
-                    showToast('Link copied to clipboard!');
-                }).catch(function () {
-                    // Final fallback
-                    prompt('Copy this link:', window.location.href);
-                });
-            }
-        });
-    }
-
-    /* ==========================================================
-       Toast Notification
-       ========================================================== */
-    function showToast(message) {
-        var toastEl = document.getElementById('swSuccessToast');
-        if (!toastEl) return;
-
-        if (message) {
-            var body = toastEl.querySelector('.toast-body');
-            if (body) {
-                body.innerHTML = '<i class="bi bi-check-circle me-2"></i>' + message;
-            }
-        }
-
-        var toast = bootstrap.Toast.getOrCreateInstance(toastEl);
-        toast.show();
-    }
-
-    /* ==========================================================
-       Check URL for inquiry success param and show toast
-       ========================================================== */
-    function checkInquiryResult() {
-        var params = new URLSearchParams(window.location.search);
-        if (params.get('inquiry') === 'success') {
-            setTimeout(function () {
-                showToast();
-            }, 300);
-        }
-    }
-
-    /* ==========================================================
-       Navbar Scroll Effect
-       ========================================================== */
-    function initNavbarScroll() {
-        var header = document.querySelector('.site-header');
-        if (!header) return;
-
-        var scrollThreshold = 50;
-
-        window.addEventListener('scroll', function () {
-            if (window.scrollY > scrollThreshold) {
-                header.classList.add('shadow');
-            } else {
-                header.classList.remove('shadow');
-            }
-        }, { passive: true });
-    }
-
-    /* ==========================================================
-       Smooth Scroll for Anchor Links
-       ========================================================== */
-    function initSmoothScroll() {
-        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-            link.addEventListener('click', function (e) {
-                var targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                var target = document.querySelector(targetId);
-                if (target) {
-                    e.preventDefault();
-                    var headerHeight = document.querySelector('.site-header');
-                    var offset = headerHeight ? headerHeight.offsetHeight : 0;
-                    var top = target.getBoundingClientRect().top + window.pageYOffset - offset - 10;
-
-                    window.scrollTo({
-                        top: top,
-                        behavior: 'smooth',
-                    });
-                }
-            });
-        });
-    }
-
-    /* ==========================================================
-       Lazy Load Images (simple IntersectionObserver fallback)
-       ========================================================== */
-    function initLazyLoad() {
-        if ('loading' in HTMLImageElement.prototype) return; // native support
-
-        var images = document.querySelectorAll('img[loading="lazy"]');
-        if (!images.length) return;
-
-        if ('IntersectionObserver' in window) {
-            var observer = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        var img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                        }
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            images.forEach(function (img) {
-                observer.observe(img);
-            });
-        }
-    }
-
-    /* ==========================================================
-       Initialize Everything on DOMContentLoaded
-       ========================================================== */
-    document.addEventListener('DOMContentLoaded', function () {
-        initInquiryButtons();
-        initInquiryCart();
-        initInquiryForm();
-        initGallery();
-        initShareButton();
-        checkInquiryResult();
-        initNavbarScroll();
-        initSmoothScroll();
-        initLazyLoad();
+  'use strict';
+  var key = 'sw_inquiry_cart';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function byId(id) { return document.getElementById(id); }
+  function cart() {
+    try { var value = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(value) ? value : []; }
+    catch (e) { return []; }
+  }
+  function save(items) { try { localStorage.setItem(key, JSON.stringify(items)); } catch (e) {} renderCart(); }
+  function modal(id) { var el = byId(id); if (el && window.bootstrap) bootstrap.Modal.getOrCreateInstance(el).show(); }
+  function escapeHtml(value) { var el = document.createElement('span'); el.textContent = String(value || ''); return el.innerHTML; }
+  function validQty(value, min) { return Math.max(min || 1, parseInt(value, 10) || min || 1); }
+  function currentQty() { var input = byId('sw-detail-qty'); return input ? validQty(input.value, parseInt(input.min, 10) || 1) : 1; }
+  function renderCart() {
+    var items = cart(), count = byId('sw-cart-count'), body = byId('sw-cart-table-body');
+    if (count) count.textContent = String(items.length);
+    if (byId('sw-cart-empty')) byId('sw-cart-empty').classList.toggle('d-none', items.length > 0);
+    if (byId('sw-cart-items')) byId('sw-cart-items').classList.toggle('d-none', items.length === 0);
+    if (byId('sw-submit-cart-inquiry')) byId('sw-submit-cart-inquiry').disabled = items.length === 0;
+    if (body) body.innerHTML = items.map(function (item) { return '<tr><td>' + escapeHtml(item.name) + '</td><td>—</td><td><input type="number" class="form-control form-control-sm sw-cart-qty" min="1" value="' + validQty(item.qty, 1) + '" data-qty-id="' + escapeHtml(item.id) + '"></td><td class="text-end"><button type="button" class="btn btn-outline-danger btn-sm" data-remove-id="' + escapeHtml(item.id) + '" aria-label="Remove"><i class="bi bi-trash"></i></button></td></tr>'; }).join('');
+    var selected = byId('sw-selected-products'); if (selected) selected.textContent = '';
+    document.querySelectorAll('.sw-add-to-inquiry').forEach(function (button) {
+      var found = items.some(function (item) { return String(item.id) === button.dataset.productId; });
+      button.classList.toggle('is-added', found);
     });
-
+  }
+  function openInquiry(button) {
+    var product = byId('sw_product'), quantity = byId('sw_quantity'), message = byId('sw_message');
+    if (product) product.value = button.dataset.product || '';
+    if (quantity) quantity.value = button.dataset.qty ? validQty(button.dataset.qty, 1) : '';
+    if (byId('sw_products')) byId('sw_products').value = '';
+    if (message) message.value = button.dataset.message || '';
+    modal('inquiryModal');
+  }
+  function updateTier() {
+    var qty = currentQty(), rows = Array.from(document.querySelectorAll('.sw-tier-row'));
+    var active = -1;
+    rows.forEach(function (row, i) { if (qty >= parseInt(row.dataset.min, 10)) active = i; });
+    rows.forEach(function (row, i) { row.classList.toggle('active', i === active); });
+    var detail = byId('sw-detail-qty');
+    if (detail) document.querySelectorAll('.sw-product-info .sw-add-to-inquiry,.sw-product-info .sw-inquiry-btn').forEach(function (button) { button.dataset.qty = String(qty); });
+  }
+  function setMainImage(url, source) {
+    var image = byId('sw-main-image'); if (!image || !url) return;
+    image.src = url;
+    document.querySelectorAll('.gallery-thumb').forEach(function (button) { button.classList.toggle('active', button === source || button.dataset.full === url); });
+    document.querySelectorAll('.sw-color').forEach(function (button) { var selected = button.dataset.full === url; button.classList.toggle('active', selected); button.setAttribute('aria-pressed', selected ? 'true' : 'false'); });
+  }
+  function initMotion() {
+    var sections = document.querySelectorAll('main section:not(.hero-v3)');
+    var items = document.querySelectorAll('.band-photo,.step-card,.product-cell,.sw-category-cell,.sw-detail-image');
+    if (reduce.matches || !('IntersectionObserver' in window)) return;
+    sections.forEach(function (el) { el.classList.add('reveal'); });
+    items.forEach(function (el, i) { el.classList.add('reveal-item'); el.style.transitionDelay = (i % 4 * 70) + 'ms'; });
+    var observer = new IntersectionObserver(function (entries) { entries.forEach(function (entry) { if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); } }); }, { threshold: .12 });
+    document.querySelectorAll('.reveal,.reveal-item').forEach(function (el) { observer.observe(el); });
+  }
+  function initCounters() {
+    var els = document.querySelectorAll('.count-up');
+    if (reduce.matches || !('IntersectionObserver' in window)) { els.forEach(function (el) { el.textContent = el.dataset.count; }); return; }
+    var observer = new IntersectionObserver(function (entries) { entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target, target = parseInt(el.dataset.count, 10) || 0, started = null;
+      function tick(time) { if (started === null) started = time; var progress = Math.min((time - started) / 1000, 1); el.textContent = Math.round(target * (1 - Math.pow(1 - progress, 3))); if (progress < 1) requestAnimationFrame(tick); }
+      el.textContent = '0'; requestAnimationFrame(tick); observer.unobserve(el);
+    }); }, { threshold: .4 });
+    els.forEach(function (el) { observer.observe(el); });
+  }
+  function initScroll() {
+    var header = document.querySelector('.site-header'), images = document.querySelectorAll('.hero-carousel .carousel-item img'), pending = false;
+    function apply() { var y = window.scrollY || 0; if (header) header.classList.toggle('is-scrolled', y > 10); if (!reduce.matches && y < 900) images.forEach(function (image) { image.style.transform = 'scale(1.14) translateY(' + Math.min(y * .10, 60) + 'px)'; }); pending = false; }
+    window.addEventListener('scroll', function () { if (!pending) { pending = true; requestAnimationFrame(apply); } }, { passive: true }); apply();
+  }
+  function initFilters() {
+    document.querySelectorAll('.js-filter').forEach(function (button) { button.addEventListener('click', function () {
+      document.querySelectorAll('.js-filter').forEach(function (b) { b.classList.toggle('active', b === button); b.classList.toggle('btn-primary', b === button); b.classList.toggle('btn-outline-primary', b !== button); });
+      var filter = button.dataset.filter, visible = 0;
+      document.querySelectorAll('.product-cell').forEach(function (cell) { var show = filter === 'all' || (cell.dataset.group || '').split(' ').indexOf(filter) !== -1; cell.hidden = !show; if (show) visible++; });
+      if (byId('sw-filter-empty')) byId('sw-filter-empty').classList.toggle('d-none', visible > 0);
+    }); });
+  }
+  function initForm() {
+    var form = byId('sw-inquiry-form'); if (!form) return;
+    form.addEventListener('submit', function (event) {
+      var email = byId('sw_email'), phone = byId('sw_phone');
+      email.classList.remove('is-invalid'); phone.classList.remove('is-invalid');
+      var emailValue = email.value.trim(), phoneValue = phone.value.trim();
+      if (!emailValue && !phoneValue) { event.preventDefault(); email.classList.add('is-invalid'); phone.classList.add('is-invalid'); return; }
+      if (emailValue && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) { event.preventDefault(); email.classList.add('is-invalid'); return; }
+      var submit = form.querySelector('[type=submit]'); if (submit) { submit.disabled = true; submit.textContent = (window.swData && swData.i18n && swData.i18n.submitting) || 'Submitting…'; }
+    });
+    if (new URLSearchParams(location.search).get('inquiry') === 'success') {
+      var success = byId('swSuccessToast'); if (success && window.bootstrap) bootstrap.Toast.getOrCreateInstance(success).show();
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    renderCart(); initMotion(); initCounters(); initScroll(); initFilters(); initForm(); updateTier();
+    if (reduce.matches && byId('swHeroCarousel') && window.bootstrap) bootstrap.Carousel.getOrCreateInstance(byId('swHeroCarousel')).pause();
+    document.addEventListener('click', function (event) {
+      var button = event.target.closest('button'); if (!button) return;
+      if (button.matches('.sw-inquiry-btn')) { event.preventDefault(); if (button.closest('.sw-product-info')) button.dataset.qty = String(currentQty()); openInquiry(button); }
+      if (button.matches('.sw-add-to-inquiry')) {
+        event.preventDefault(); var items = cart(), id = button.dataset.productId, qty = button.closest('.sw-product-info') ? currentQty() : validQty(button.dataset.qty, 1);
+        var existing = items.find(function (item) { return String(item.id) === id; });
+        if (existing) existing.qty += qty; else items.push({ id: id, name: button.dataset.productName || '', qty: qty });
+        save(items); var old = button.innerHTML; button.textContent = 'Added ✓'; setTimeout(function () { button.innerHTML = old; }, 1100);
+      }
+      if (button.matches('[data-remove-id]')) { event.preventDefault(); save(cart().filter(function (item) { return String(item.id) !== button.dataset.removeId; })); }
+      if (button.id === 'sw-clear-cart') save([]);
+      if (button.id === 'sw-submit-cart-inquiry') {
+        var items = cart(); if (!items.length) return;
+        var list = items.map(function (item) { return item.name + ' × ' + item.qty; }).join('\n');
+        var product = byId('sw_product'), message = byId('sw_message'); if (product) product.value = '';
+        if (byId('sw_products')) byId('sw_products').value = items.map(function (item) { return item.name + ' × ' + item.qty; }).join('|');
+        if (message) message.value = 'Products requested:\n' + list;
+        var cartModal = byId('inquiryCartModal'); if (cartModal && window.bootstrap) bootstrap.Modal.getOrCreateInstance(cartModal).hide();
+        if (cartModal) cartModal.addEventListener('hidden.bs.modal', function once() { cartModal.removeEventListener('hidden.bs.modal', once); modal('inquiryModal'); });
+      }
+      if (button.matches('.gallery-thumb')) setMainImage(button.dataset.full, button);
+      if (button.matches('.sw-color')) {
+        document.querySelectorAll('.sw-color').forEach(function (b) { b.classList.toggle('active', b === button); b.setAttribute('aria-pressed', b === button ? 'true' : 'false'); });
+        setMainImage(button.dataset.full, null);
+      }
+      if (button.matches('.sw-qty-plus,.sw-qty-minus')) { var input = byId('sw-detail-qty'); if (input) { var step = parseInt(input.step, 10) || 10; input.value = validQty(currentQty() + (button.matches('.sw-qty-plus') ? step : -step), parseInt(input.min, 10)); updateTier(); } }
+    });
+    document.addEventListener('change', function (event) {
+      if (event.target.id === 'sw-detail-qty') { event.target.value = currentQty(); updateTier(); }
+      if (event.target.matches('.sw-cart-qty')) { var items = cart(), item = items.find(function (i) { return String(i.id) === event.target.dataset.qtyId; }); if (item) { item.qty = validQty(event.target.value, 1); save(items); } }
+    });
+    document.addEventListener('input', function (event) { if (event.target.id === 'sw-detail-qty') updateTier(); });
+  });
 })();

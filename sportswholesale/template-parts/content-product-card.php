@@ -12,6 +12,8 @@ $subtitle    = get_post_meta( $post_id, '_product_subtitle', true );
 $price       = get_post_meta( $post_id, '_product_price_reference', true );
 $moq         = get_post_meta( $post_id, '_product_moq', true );
 $material    = get_post_meta( $post_id, '_product_material', true );
+$box_qty     = get_post_meta( $post_id, '_product_quantity_per_box', true );
+$box_spec    = get_post_meta( $post_id, '_product_box_spec', true );
 $is_featured = sportswholesale_is_featured( $post_id );
 $cat_terms   = get_the_terms( $post_id, 'product_category' );
 $cat_name    = ( $cat_terms && ! is_wp_error( $cat_terms ) ) ? $cat_terms[0]->name : '';
@@ -27,7 +29,7 @@ $cat_color   = sportswholesale_get_category_color( $cat_slug );
         <a href="<?php the_permalink(); ?>" class="product-card-img-link">
             <?php 
             $thumb_id = get_post_thumbnail_id( get_the_ID() );
-            $thumb_url = wp_get_attachment_image_url( $thumb_id, 'product-card' );
+            $thumb_url = wp_get_attachment_image_url( $thumb_id, 'full' );
             ?>
             <img src="<?php echo esc_url( $thumb_url ); ?>" class="card-img-top" alt="<?php the_title_attribute(); ?>" loading="lazy">
         </a>
@@ -48,9 +50,8 @@ $cat_color   = sportswholesale_get_category_color( $cat_slug );
             <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark stretched-link-name"><?php the_title(); ?></a>
         </h3>
 
-        <?php if ( $subtitle ) : ?>
-            <p class="card-text small text-muted mb-2"><?php echo esc_html( sw_translate_quantity( $subtitle ) ); ?></p>
-        <?php endif; ?>
+        <?php $spec_parts = array_filter( [ $material ? sw_translate_meta( $material ) : '', $box_qty ? sw_translate_quantity( $box_qty ) : '', $box_spec ? sw_translate_quantity( $box_spec ) : '' ] ); ?>
+        <?php if ( $spec_parts || $subtitle ) : ?><p class="card-text small text-muted mb-2 sw-card-specs"><?php echo esc_html( $spec_parts ? implode( ' · ', $spec_parts ) : sw_translate_quantity( $subtitle ) ); ?></p><?php endif; ?>
 
         <div class="mt-auto">
             <?php if ( $price ) : ?>
@@ -67,6 +68,7 @@ $cat_color   = sportswholesale_get_category_color( $cat_slug );
                 <button type="button" class="btn btn-outline-secondary btn-sm sw-add-to-inquiry"
                         data-product-id="<?php echo esc_attr( get_the_ID() ); ?>"
                         data-product-name="<?php echo esc_attr( get_the_title() ); ?>"
+                        data-qty="<?php echo esc_attr( is_numeric( $moq ) ? $moq : 1 ); ?>"
                         title="<?php esc_attr_e( 'Add to Inquiry Cart', 'sportswholesale' ); ?>">
                     <i class="bi bi-cart-plus"></i>
                 </button>

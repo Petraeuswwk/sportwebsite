@@ -60,6 +60,10 @@ if ( $is_tax ) {
         ],
     ];
 }
+if ( ! $is_tax && ! empty( $_GET['category'] ) ) {
+    $selected_category = sanitize_title( wp_unslash( $_GET['category'] ) );
+    $args['tax_query'] = [ [ 'taxonomy' => 'product_category', 'field' => 'slug', 'terms' => $selected_category ] ];
+}
 
 // Material filter
 if ( ! empty( $_GET['material'] ) ) {
@@ -113,6 +117,14 @@ if ( 'success' === $inquiry_status ) : ?>
             <h1 class="h3 mb-2"><?php echo esc_html( sw_t( 'All Products' ) ); ?></h1>
             <p class="text-muted"><?php echo esc_html( sw_t( 'Browse our complete catalog of wholesale sports equipment' ) ); ?></p>
         <?php endif; ?>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2 mb-4 sw-filters">
+        <?php $filter_terms = get_terms( [ 'taxonomy' => 'product_category', 'hide_empty' => true ] ); $selected_slug = $is_tax ? $current_cat->slug : ( isset( $_GET['category'] ) ? sanitize_title( wp_unslash( $_GET['category'] ) ) : '' ); ?>
+        <a class="btn rounded-pill <?php echo $selected_slug ? 'btn-outline-primary' : 'btn-primary'; ?>" href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>"><?php echo esc_html( sw_t( 'All' ) ); ?></a>
+        <?php if ( ! is_wp_error( $filter_terms ) ) : foreach ( $filter_terms as $term ) : ?>
+            <a class="btn rounded-pill <?php echo $selected_slug === $term->slug ? 'btn-primary' : 'btn-outline-primary'; ?>" href="<?php echo esc_url( add_query_arg( 'category', $term->slug, get_post_type_archive_link( 'product' ) ) ); ?>"><?php echo esc_html( sw_translate_category( $term->name ) ); ?></a>
+        <?php endforeach; endif; ?>
     </div>
 
     <!-- Filters & Sort Bar -->
@@ -181,8 +193,5 @@ if ( 'success' === $inquiry_status ) : ?>
         </div>
     <?php endif; ?>
 </div>
-
-<!-- Inquiry Form Modal -->
-<?php get_template_part( 'template-parts/inquiry', 'form' ); ?>
 
 <?php get_footer(); ?>

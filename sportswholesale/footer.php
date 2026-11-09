@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
                     <?php endif; ?>
                 </h5>
                 <p class="text-secondary small">
-                    <?php echo esc_html( sw_t( 'Your trusted partner for high-quality sports equipment at competitive wholesale prices. Serving clients across the Middle East, Africa, South America, and Europe.' ) ); ?>
+                    <?php echo esc_html( sw_t( 'Browse our sports equipment catalog and send a product list for a wholesale quote.' ) ); ?>
                 </p>
             </div>
 
@@ -46,22 +46,19 @@ defined( 'ABSPATH' ) || exit;
             <div class="col-lg-3 col-md-4">
                 <h6 class="mb-3 text-uppercase"><?php echo esc_html( sw_t( 'Contact Us' ) ); ?></h6>
                 <ul class="list-unstyled small text-secondary">
-                    <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@example.com</li>
-                    <li class="mb-2"><i class="bi bi-phone me-2"></i>+86 138 0000 0000</li>
-                    <li class="mb-2"><i class="bi bi-whatsapp me-2"></i>+86 138 0000 0000</li>
+                    <?php $sw_email = get_theme_mod( 'sw_contact_email', 'magicallsports@163.com' ); $sw_phone = get_theme_mod( 'sw_contact_phone', '' ); $sw_whatsapp = get_theme_mod( 'sw_contact_whatsapp', '' ); ?>
+                    <?php if ( $sw_email ) : ?><li class="mb-2"><i class="bi bi-envelope me-2"></i><a href="mailto:<?php echo esc_attr( $sw_email ); ?>"><?php echo esc_html( $sw_email ); ?></a></li><?php endif; ?>
+                    <?php if ( $sw_phone ) : ?><li class="mb-2"><i class="bi bi-phone me-2"></i><?php echo esc_html( $sw_phone ); ?></li><?php endif; ?>
+                    <?php if ( $sw_whatsapp ) : ?><li class="mb-2"><i class="bi bi-whatsapp me-2"></i><?php echo esc_html( $sw_whatsapp ); ?></li><?php endif; ?>
                     <li class="mb-2"><i class="bi bi-geo-alt me-2"></i><?php echo esc_html( sw_t( 'China' ) ); ?></li>
                 </ul>
             </div>
 
             <!-- Social Media -->
             <div class="col-lg-3 col-md-4">
-                <h6 class="mb-3 text-uppercase"><?php echo esc_html( sw_t( 'Follow Us' ) ); ?></h6>
+                <h6 class="mb-3 text-uppercase"><?php echo esc_html( sw_t( 'Wholesale inquiries' ) ); ?></h6>
                 <div class="d-flex gap-3">
-                    <a href="#" class="text-secondary fs-5" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-secondary fs-5" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="text-secondary fs-5" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                    <a href="#" class="text-secondary fs-5" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-                    <a href="#" class="text-secondary fs-5" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <?php if ( $sw_whatsapp ) : ?><a href="<?php echo esc_url( 'https://wa.me/' . preg_replace( '/\D/', '', $sw_whatsapp ) . '?text=' . rawurlencode( 'Hello MAGICALL, I would like to ask about your wholesale products.' ) ); ?>" class="text-secondary fs-5" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a><?php endif; ?>
                 </div>
                 <p class="mt-3 small text-secondary">
                     <?php echo esc_html( sw_t( 'OEM & ODM orders welcome. Custom branding available.' ) ); ?>
@@ -85,6 +82,11 @@ defined( 'ABSPATH' ) || exit;
         </div>
     </div>
 </footer>
+<?php if ( $sw_whatsapp ) : ?>
+    <?php $sw_wa_text = is_singular( 'product' ) ? 'Hello MAGICALL, I would like to ask about ' . get_the_title() . '.' : 'Hello MAGICALL, I would like to ask about your wholesale products.'; ?>
+    <a class="sw-whatsapp-float" href="<?php echo esc_url( 'https://wa.me/' . preg_replace( '/\D/', '', $sw_whatsapp ) . '?text=' . rawurlencode( $sw_wa_text ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+<?php endif; ?>
+<?php get_template_part( 'template-parts/inquiry', 'form' ); ?>
 
 <?php wp_footer(); ?>
 </body>

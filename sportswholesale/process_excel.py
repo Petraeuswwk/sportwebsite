@@ -186,8 +186,34 @@ def main():
         all_products.extend(products)
         print(f"  Products found: {len(products)}")
 
-    # Save product data as JSON
+    # Keep optional Yiwugo records and previously enriched fields when the Excel
+    # catalog is rebuilt. Yiwugo image values must be local filenames in images/.
     json_path = os.path.join(OUTPUT_DIR, "products.json")
+    for extra_path in (json_path, os.path.join(OUTPUT_DIR, "yiwugo_products.json")):
+        if not os.path.isfile(extra_path):
+            continue
+        try:
+            with open(extra_path, encoding="utf-8") as f:
+                extra_products = json.load(f)
+        except (OSError, ValueError) as exc:
+            print(f"Warning: could not read {extra_path}: {exc}")
+            continue
+        if not isinstance(extra_products, list):
+            continue
+        by_title = {p.get("title_en") or p.get("title"): i for i, p in enumerate(all_products)}
+        for extra in extra_products:
+            if not isinstance(extra, dict):
+                continue
+            identity = extra.get("title_en") or extra.get("title")
+            if not identity:
+                continue
+            if identity in by_title:
+                all_products[by_title[identity]].update(extra)
+            elif extra.get("title_en") or extra.get("source_ids"):
+                by_title[identity] = len(all_products)
+                all_products.append(extra)
+
+    # Save product data as JSON
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(all_products, f, ensure_ascii=False, indent=2)
 

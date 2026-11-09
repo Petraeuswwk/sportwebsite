@@ -47,6 +47,7 @@ function sportswholesale_fallback_menu() {
         echo '<li class="nav-item"><a class="nav-link" href="' . esc_url( get_post_type_archive_link( 'product' ) ) . '">' . esc_html( sw_t( 'Products' ) ) . '</a></li>';
     }
 
+    echo '<li class="nav-item"><a class="nav-link" href="' . esc_url( home_url( '/#about' ) ) . '">' . esc_html( sw_t( 'About' ) ) . '</a></li>';
     echo '<li class="nav-item"><a class="nav-link" href="#contact">' . esc_html( sw_t( 'Contact' ) ) . '</a></li>';
     echo '</ul>';
 }

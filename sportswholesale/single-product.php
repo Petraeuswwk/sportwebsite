@@ -1,201 +1,48 @@
 <?php
-/**
- * Single product template
- *
- * @package SportsWholesale
- */
-
+/** Product detail page with optional enriched import fields. */
 get_header();
-
-while ( have_posts() ) :
-    the_post();
-
-    $post_id     = get_the_ID();
-    $subtitle    = get_post_meta( $post_id, '_product_subtitle', true );
-    $price       = get_post_meta( $post_id, '_product_price_reference', true );
-    $moq         = get_post_meta( $post_id, '_product_moq', true );
-    $material    = get_post_meta( $post_id, '_product_material', true );
-    $featured    = sportswholesale_is_featured( $post_id );
-    $gallery_ids = sportswholesale_get_gallery_ids( $post_id );
-    $cat_terms   = get_the_terms( $post_id, 'product_category' );
-    $cat_name    = ( $cat_terms && ! is_wp_error( $cat_terms ) ) ? $cat_terms[0]->name : '';
-    $cat_slug    = ( $cat_terms && ! is_wp_error( $cat_terms ) ) ? $cat_terms[0]->slug : '';
-
-    // Build image array: thumbnail + gallery
-    $images = [];
-    if ( has_post_thumbnail() ) {
-        $images[] = [
-            'full' => get_the_post_thumbnail_url( $post_id, 'full' ),
-            'thumb' => get_the_post_thumbnail_url( $post_id, 'thumbnail' ),
-        ];
-    }
-    foreach ( $gallery_ids as $img_id ) {
-        $full_url  = wp_get_attachment_image_url( $img_id, 'full' );
-        $thumb_url = wp_get_attachment_image_url( $img_id, 'thumbnail' );
-        if ( $full_url ) {
-            $images[] = [
-                'full'  => $full_url,
-                'thumb' => $thumb_url,
-            ];
-        }
-    }
-
-    // Inquiry result notice
-    $inquiry_status = isset( $_GET['inquiry'] ) ? sanitize_text_field( wp_unslash( $_GET['inquiry'] ) ) : '';
+while ( have_posts() ) : the_post();
+$id = get_the_ID();
+$title = get_post_meta( $id, '_product_title_en', true ) ?: get_the_title();
+$price = get_post_meta( $id, '_product_price_reference', true );
+$tiers = get_post_meta( $id, '_product_price_tiers', true );
+$tiers = is_array( $tiers ) ? $tiers : [];
+$moq_raw = get_post_meta( $id, '_product_moq', true );
+$moq = is_numeric( $moq_raw ) ? max( 1, (int) $moq_raw ) : 1;
+$moq_unit = get_post_meta( $id, '_product_moq_unit', true );
+$lead = get_post_meta( $id, '_product_lead_time_days', true );
+$colors = get_post_meta( $id, '_product_colors', true );
+$colors = is_array( $colors ) ? $colors : [];
+$specs = get_post_meta( $id, '_product_specs', true );
+$specs = is_array( $specs ) ? $specs : [];
+$packing = get_post_meta( $id, '_product_packing', true );
+$packing = is_array( $packing ) ? $packing : [];
+$details = get_post_meta( $id, '_product_detail_images', true );
+$details = is_array( $details ) ? $details : [];
+$terms = get_the_terms( $id, 'product_category' );
+$cat = $terms && ! is_wp_error( $terms ) ? $terms[0] : null;
+$images = [];
+if ( has_post_thumbnail() ) { $images[] = get_post_thumbnail_id( $id ); }
+foreach ( sportswholesale_get_gallery_ids( $id ) as $img_id ) { if ( $img_id && ! in_array( $img_id, $images, true ) ) { $images[] = $img_id; } }
 ?>
-
-<?php if ( 'success' === $inquiry_status ) : ?>
-    <div class="container mt-3">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="bi bi-check-circle me-2"></i><?php esc_html_e( 'Your inquiry has been sent successfully! We will contact you soon.', 'sportswholesale' ); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php esc_attr_e( 'Close', 'sportswholesale' ); ?>"></button>
-        </div>
-    </div>
-<?php endif; ?>
-
-<div class="container py-4">
-    <!-- Breadcrumb -->
-    <nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'sportswholesale' ); ?>" class="mb-3">
-        <ol class="breadcrumb small">
-            <li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-decoration-none"><?php echo esc_html( sw_t( 'Home' ) ); ?></a></li>
-            <li class="breadcrumb-item"><a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>" class="text-decoration-none"><?php echo esc_html( sw_t( 'Products' ) ); ?></a></li>
-            <?php if ( $cat_terms && ! is_wp_error( $cat_terms ) ) : ?>
-                <li class="breadcrumb-item"><a href="<?php echo esc_url( get_term_link( $cat_terms[0] ) ); ?>" class="text-decoration-none"><?php echo esc_html( sw_translate_category( $cat_name ) ); ?></a></li>
-            <?php endif; ?>
-            <li class="breadcrumb-item active" aria-current="page"><?php the_title(); ?></li>
-        </ol>
-    </nav>
-
-    <div class="row g-4">
-        <!-- Image Gallery -->
-        <div class="col-lg-6">
-            <div class="product-gallery">
-                <!-- Main Image -->
-                <div class="main-image mb-3 border rounded overflow-hidden">
-                    <?php if ( ! empty( $images ) ) : ?>
-                        <img id="sw-main-image" src="<?php echo esc_url( $images[0]['full'] ); ?>" alt="<?php the_title_attribute(); ?>" class="img-fluid w-100" style="max-height:500px;object-fit:contain;">
-                    <?php else : ?>
-                        <div class="bg-light d-flex align-items-center justify-content-center" style="height:400px;">
-                            <i class="bi bi-image text-muted" style="font-size:4rem;"></i>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                <!-- Thumbnails -->
-                <?php if ( count( $images ) > 1 ) : ?>
-                    <div class="d-flex gap-2 flex-wrap gallery-thumbnails">
-                        <?php foreach ( $images as $idx => $img ) : ?>
-                            <button type="button" class="btn p-0 border gallery-thumb<?php echo 0 === $idx ? ' active' : ''; ?>" data-full="<?php echo esc_url( $img['full'] ); ?>">
-                                <img src="<?php echo esc_url( $img['thumb'] ); ?>" alt="" class="img-fluid" style="width:70px;height:70px;object-fit:cover;">
-                            </button>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-
-        <!-- Product Info -->
-        <div class="col-lg-6">
-            <?php if ( $cat_name ) : ?>
-                <a href="<?php echo esc_url( get_term_link( $cat_terms[0] ) ); ?>" class="badge text-decoration-none mb-2" style="background-color:<?php echo esc_attr( sportswholesale_get_category_color( $cat_slug ) ); ?>;"><?php echo esc_html( sw_translate_category( $cat_name ) ); ?></a>
-            <?php endif; ?>
-
-            <h1 class="h3 mb-2"><?php the_title(); ?></h1>
-
-            <?php if ( $subtitle ) : ?>
-                <p class="text-muted mb-3"><?php echo esc_html( sw_translate_quantity( $subtitle ) ); ?></p>
-            <?php endif; ?>
-
-            <?php if ( $featured ) : ?>
-                <span class="badge bg-warning text-dark mb-3"><i class="bi bi-star-fill me-1"></i><?php echo esc_html( sw_t( 'Featured' ) ); ?></span>
-            <?php endif; ?>
-
-            <!-- Product Details Table -->
-            <div class="card border-0 bg-light mb-4">
-                <div class="card-body">
-                    <?php if ( $price ) : ?>
-                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
-                            <span class="text-muted"><?php echo esc_html( sw_t( 'Reference Price' ) ); ?></span>
-                            <span class="fw-bold text-primary fs-5"><?php echo esc_html( sw_translate_price( $price ) ); ?></span>
-                        </div>
-                    <?php endif; ?>
-                    <?php if ( $moq ) : ?>
-                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
-                            <span class="text-muted"><?php echo esc_html( sw_t( 'MOQ' ) ); ?></span>
-                            <span class="fw-semibold"><?php echo esc_html( sw_translate_moq( $moq ) ); ?></span>
-                        </div>
-                    <?php endif; ?>
-                    <?php if ( $material ) : ?>
-                        <div class="d-flex justify-content-between">
-                            <span class="text-muted"><?php echo esc_html( sw_t( 'Material' ) ); ?></span>
-                            <span class="fw-semibold"><?php echo esc_html( sw_translate_meta( $material ) ); ?></span>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="d-flex gap-2 mb-4">
-                <button type="button" class="btn btn-primary btn-lg flex-grow-1 sw-inquiry-btn" data-product="<?php echo esc_attr( get_the_title() ); ?>">
-                    <i class="bi bi-envelope me-2"></i><?php echo esc_html( sw_t( 'Get a Quote' ) ); ?>
-                </button>
-                <button type="button" class="btn btn-outline-secondary btn-lg" onclick="window.print();" title="<?php esc_attr_e( 'Print', 'sportswholesale' ); ?>">
-                    <i class="bi bi-printer"></i>
-                </button>
-                <button type="button" class="btn btn-outline-secondary btn-lg" id="sw-share-btn" title="<?php esc_attr_e( 'Share', 'sportswholesale' ); ?>">
-                    <i class="bi bi-share"></i>
-                </button>
-            </div>
-
-            <!-- Description -->
-            <?php if ( get_the_content() ) : ?>
-                <div class="product-description">
-                    <h3 class="h5 mb-3"><?php echo esc_html( sw_t( 'Product Description' ) ); ?></h3>
-                    <div class="content-area">
-                        <?php the_content(); ?>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
-    </div>
-
-    <!-- Related Products -->
-    <?php
-    $related_args = [
-        'post_type'      => 'product',
-        'posts_per_page' => 4,
-        'post__not_in'   => [ $post_id ],
-        'orderby'        => 'rand',
-    ];
-
-    if ( $cat_terms && ! is_wp_error( $cat_terms ) ) {
-        $related_args['tax_query'] = [
-            [
-                'taxonomy' => 'product_category',
-                'field'    => 'term_id',
-                'terms'    => $cat_terms[0]->term_id,
-            ],
-        ];
-    }
-
-    $related = new WP_Query( $related_args );
-
-    if ( $related->have_posts() ) : ?>
-        <section class="mt-5 pt-4 border-top">
-            <h2 class="h4 mb-4"><?php echo esc_html( sw_t( 'Related Products' ) ); ?></h2>
-            <div class="row g-4">
-                <?php while ( $related->have_posts() ) : $related->the_post(); ?>
-                    <div class="col-md-6 col-lg-3">
-                        <?php get_template_part( 'template-parts/content', 'product-card' ); ?>
-                    </div>
-                <?php endwhile; wp_reset_postdata(); ?>
-            </div>
-        </section>
-    <?php endif; ?>
+<div class="container py-4 sw-detail" data-moq="<?php echo esc_attr( $moq ); ?>">
+<nav aria-label="Breadcrumb" class="mb-4"><ol class="breadcrumb small"><li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo esc_html( sw_t( 'Home' ) ); ?></a></li><li class="breadcrumb-item"><a href="<?php echo esc_url( get_post_type_archive_link( 'product' ) ); ?>"><?php echo esc_html( sw_t( 'Products' ) ); ?></a></li><?php if ( $cat ) : ?><li class="breadcrumb-item"><a href="<?php echo esc_url( get_term_link( $cat ) ); ?>"><?php echo esc_html( sw_translate_category( $cat->name ) ); ?></a></li><?php endif; ?><li class="breadcrumb-item active" aria-current="page"><?php echo esc_html( $title ); ?></li></ol></nav>
+<div class="row g-5">
+  <div class="col-lg-6"><div class="product-gallery"><div class="main-image sw-main-image mb-3"><?php if ( $images ) : ?><img id="sw-main-image" src="<?php echo esc_url( wp_get_attachment_image_url( $images[0], 'full' ) ); ?>" alt="<?php echo esc_attr( $title ); ?>"><?php else : ?><div class="sw-image-empty"><i class="bi bi-image"></i></div><?php endif; ?></div>
+  <?php if ( count( $images ) > 1 ) : ?><div class="gallery-thumbnails d-flex flex-wrap gap-2"><?php foreach ( $images as $i => $img_id ) : ?><button type="button" class="gallery-thumb <?php echo $i ? '' : 'active'; ?>" data-full="<?php echo esc_url( wp_get_attachment_image_url( $img_id, 'full' ) ); ?>" aria-label="<?php echo esc_attr( 'View image ' . ( $i + 1 ) ); ?>"><img src="<?php echo esc_url( wp_get_attachment_image_url( $img_id, 'thumbnail' ) ); ?>" alt=""></button><?php endforeach; ?></div><?php endif; ?></div></div>
+  <div class="col-lg-6 sw-product-info"><h1 class="mb-2"><?php echo esc_html( $title ); ?></h1><p class="text-muted small mb-4">MAGICALL · Yiwu, China<?php $subtitle = get_post_meta( $id, '_product_subtitle', true ); if ( $subtitle ) { echo ' · ' . esc_html( sw_translate_quantity( $subtitle ) ); } ?></p>
+  <?php if ( $tiers ) : ?><div class="sw-tier-box mb-3"><div class="sw-tier-heading"><?php echo esc_html( sw_t( 'Quantity pricing' ) ); ?></div><?php foreach ( $tiers as $i => $tier ) : if ( ! isset( $tier['min_qty'], $tier['price'] ) ) { continue; } ?><div class="sw-tier-row" data-min="<?php echo esc_attr( absint( $tier['min_qty'] ) ); ?>"><span><?php echo esc_html( absint( $tier['min_qty'] ) ); ?>+ <?php echo esc_html( $moq_unit ); ?></span><strong><?php echo esc_html( $tier['price'] ); ?></strong></div><?php endforeach; ?></div>
+  <?php elseif ( $price ) : ?><div class="sw-tier-box mb-3"><span class="text-muted"><?php echo esc_html( sw_t( 'Reference Price' ) ); ?></span><strong class="sw-single-price"><?php echo esc_html( sw_translate_price( $price ) ); ?></strong></div><?php endif; ?>
+  <p class="sw-terms-line"><strong>MOQ <?php echo esc_html( $moq_raw ?: 'Ask us' ); ?> <?php echo esc_html( $moq_unit ); ?></strong><?php if ( $lead ) : ?> · <?php echo esc_html( sprintf( sw_t( 'Ready to ship in about %d days' ), (int) $lead ) ); ?><?php endif; ?> · <?php echo esc_html( sw_t( 'EXW / FOB — confirm when you inquire' ) ); ?></p>
+  <?php if ( $colors ) : ?><div class="mb-3"><h2 class="h6 mb-2"><?php echo esc_html( sw_t( 'Colors / styles' ) ); ?></h2><div class="d-flex flex-wrap gap-2 sw-color-list"><?php foreach ( $colors as $i => $color ) : $img_id = absint( $color['picture_id'] ?? 0 ); $url = $img_id ? wp_get_attachment_image_url( $img_id, 'full' ) : ''; ?><button type="button" class="sw-color <?php echo $i ? '' : 'active'; ?>" data-full="<?php echo esc_url( $url ); ?>" aria-pressed="<?php echo $i ? 'false' : 'true'; ?>"><?php if ( $url ) : ?><img src="<?php echo esc_url( wp_get_attachment_image_url( $img_id, 'thumbnail' ) ); ?>" alt=""><?php endif; ?><span><?php echo esc_html( $color['code'] ?? '' ); ?></span></button><?php endforeach; ?></div></div><?php endif; ?>
+  <div class="mb-3"><label for="sw-detail-qty" class="form-label fw-semibold"><?php echo esc_html( sw_t( 'Quantity' ) ); ?></label><div class="sw-qty-stepper"><button type="button" class="sw-qty-minus" aria-label="Decrease quantity">−</button><input id="sw-detail-qty" type="number" min="<?php echo esc_attr( $moq ); ?>" step="10" value="<?php echo esc_attr( $moq ); ?>"><button type="button" class="sw-qty-plus" aria-label="Increase quantity">+</button></div></div>
+  <div class="d-flex flex-wrap gap-2 mb-3"><button type="button" class="btn btn-outline-primary btn-lg sw-add-to-inquiry" data-product-id="<?php echo esc_attr( $id ); ?>" data-product-name="<?php echo esc_attr( $title ); ?>" data-qty="<?php echo esc_attr( $moq ); ?>"><i class="bi bi-bag-plus me-1"></i><?php echo esc_html( sw_t( 'Add to Inquiry Basket' ) ); ?></button><button type="button" class="btn btn-danger btn-lg sw-inquiry-btn" data-product="<?php echo esc_attr( $title ); ?>" data-qty="<?php echo esc_attr( $moq ); ?>"><?php echo esc_html( sw_t( 'Inquire Now' ) ); ?></button></div>
+  <?php $chips = array_slice( array_filter( [ get_post_meta( $id, '_product_material', true ), get_post_meta( $id, '_product_quantity_per_box', true ), get_post_meta( $id, '_product_box_spec', true ) ] ), 0, 3 ); if ( $chips ) : ?><div class="d-flex flex-wrap gap-2"><?php foreach ( $chips as $chip ) : ?><span class="sw-spec-chip"><?php echo esc_html( sw_translate_meta( $chip ) ); ?></span><?php endforeach; ?></div><?php endif; ?>
+  </div></div>
+<?php if ( $specs || $packing ) : ?><section class="py-5 sw-detail-tables"><div class="row g-4"><?php foreach ( [ [ 'Product specifications', $specs ], [ 'Packing & shipping', $packing ] ] as $table ) : if ( ! $table[1] ) { continue; } ?><div class="col-lg-6"><div class="sw-data-table"><h2 class="h4"><?php echo esc_html( sw_t( $table[0] ) ); ?></h2><table class="table"><tbody><?php foreach ( $table[1] as $key => $value ) : ?><tr><th scope="row"><?php echo esc_html( sw_t( $key ) ); ?></th><td><?php echo esc_html( $value ); ?></td></tr><?php endforeach; ?></tbody></table></div></div><?php endforeach; ?></div></section><?php endif; ?>
+<section class="sw-oem-band my-5"><div><h2 class="h4 mb-1"><?php echo esc_html( sw_t( 'Your logo on request' ) ); ?></h2><p class="mb-0"><?php echo esc_html( sw_t( 'Ask about logo printing for volume orders.' ) ); ?></p></div><button type="button" class="btn btn-light sw-inquiry-btn" data-product="<?php echo esc_attr( $title ); ?>" data-message="OEM logo request"><?php echo esc_html( sw_t( 'Ask about OEM' ) ); ?></button></section>
+<?php if ( $details ) : ?><section class="py-5 sw-details-images"><h2 class="text-center mb-4"><?php echo esc_html( sw_t( 'Details & more views' ) ); ?></h2><?php foreach ( $details as $img_id ) : $url = wp_get_attachment_image_url( absint( $img_id ), 'full' ); if ( $url ) : ?><img class="sw-detail-image" src="<?php echo esc_url( $url ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy"><?php endif; endforeach; ?></section><?php endif; ?>
+<section class="py-5"><h2 class="h4 mb-3"><?php echo esc_html( sw_t( 'Warehouse & packing' ) ); ?></h2><div class="row g-3"><?php foreach ( [ 'warehouse.jpg', 'packing.jpg' ] as $img ) : ?><div class="col-md-6"><img class="sw-warehouse-image" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/factory/' . $img ); ?>" alt="Reference warehouse or packing image" loading="lazy"></div><?php endforeach; ?></div><p class="small text-muted mt-2"><?php echo esc_html( sw_t( 'Reference images. Replace with verified partner photos before launch.' ) ); ?></p></section>
+<?php $related_args = [ 'post_type' => 'product', 'posts_per_page' => 4, 'post__not_in' => [ $id ] ]; if ( $cat ) { $related_args['tax_query'] = [ [ 'taxonomy' => 'product_category', 'field' => 'term_id', 'terms' => $cat->term_id ] ]; } $related = new WP_Query( $related_args ); if ( $related->have_posts() ) : ?><section class="py-5 border-top"><h2 class="h4 mb-4"><?php echo esc_html( sw_t( 'Related Products' ) ); ?></h2><div class="row g-4"><?php while ( $related->have_posts() ) : $related->the_post(); ?><div class="col-md-6 col-lg-3"><?php get_template_part( 'template-parts/content', 'product-card' ); ?></div><?php endwhile; wp_reset_postdata(); ?></div></section><?php endif; ?>
 </div>
-
-<?php endwhile; ?>
-
-<!-- Inquiry Form Modal -->
-<?php get_template_part( 'template-parts/inquiry', 'form' ); ?>
-
-<?php get_footer(); ?>
+<?php endwhile; get_footer(); ?>
